@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ServiceError: Error {
+public enum ServiceError: Error {
     case URLCreationError
     case RequestFailed
     case DataTaskError(_ message: String)
@@ -18,7 +18,7 @@ enum ServiceError: Error {
     case ServerError(_ code: Int)
 }
 
-final class TVSeriesService {
+final public class TVSeriesService {
     
     private func buildRequest(api: API) throws -> URLRequest {
         var urlComponents = URLComponents()
@@ -26,7 +26,10 @@ final class TVSeriesService {
         
         urlComponents.scheme = api.schema
         urlComponents.host = api.host
+        urlComponents.path += api.version
         urlComponents.path += api.path
+        
+        queryItems.append(api.apiKey)
         
         api.queryItems.forEach { (name, value) in
             queryItems.append(URLQueryItem(name: name, value: value))
@@ -38,6 +41,7 @@ final class TVSeriesService {
         urlComponents.queryItems = queryItems
         
         if let url = urlComponents.url {
+            print("URL: \(url)")
             return URLRequest(url: url)
         } else {
             throw ServiceError.URLCreationError
@@ -61,16 +65,16 @@ final class TVSeriesService {
             }
             
             if let data = data, let response = response as? HTTPURLResponse {
-                if (100...200).contains(response.statusCode) {
+                if (100...199).contains(response.statusCode) {
                     failure(ServiceError.Information(response.statusCode))
-                } else if (200...300).contains(response.statusCode) {
+                } else if (200...299).contains(response.statusCode) {
                     let model = try? JSONDecoder().decode(T.self, from: data)
                     success(model)
-                } else if (300...400).contains(response.statusCode) {
+                } else if (300...399).contains(response.statusCode) {
                     failure(ServiceError.Redirection(response.statusCode))
-                } else if (400...500).contains(response.statusCode) {
+                } else if (400...499).contains(response.statusCode) {
                     failure(ServiceError.ClientError(response.statusCode))
-                } else if (500...600).contains(response.statusCode) {
+                } else if (500...599).contains(response.statusCode) {
                     failure(ServiceError.ServerError(response.statusCode))
                 } else {
                     failure(ServiceError.Unknown(response.statusCode))
@@ -81,18 +85,22 @@ final class TVSeriesService {
     }
 }
 
-extension TVSeriesService {
+public extension TVSeriesService {
     
-    public func getPopularTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
-        load(api: TVSeriesAPI.popular(page: page), model: TvSeries.self) { data in
+    static func getPopularTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
+        let service = TVSeriesService()
+        
+        service.load(api: TVSeriesAPI.popular(page: page), model: TvSeries.self) { data in
             success(data)
         } failure: { error in
             failure(error)
         }
     }
     
-    public func getTopRatedTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
-        load(api: TVSeriesAPI.topRated(page: page), model: TvSeries.self) { data in
+    static func getTopRatedTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
+        let service = TVSeriesService()
+        
+        service.load(api: TVSeriesAPI.topRated(page: page), model: TvSeries.self) { data in
             success(data)
         } failure: { error in
             failure(error)

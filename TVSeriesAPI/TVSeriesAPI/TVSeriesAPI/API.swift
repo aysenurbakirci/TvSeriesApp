@@ -11,7 +11,7 @@ protocol API {
     var schema: String { get }
     var host: String { get }
     var version: String { get }
-    var apiKey: [String: String] { get }
+    var apiKey: URLQueryItem { get }
     var path: String { get }
     var queryItems: [String: String] { get }
 }
@@ -30,8 +30,8 @@ extension API {
         "/3"
     }
     
-    var apiKey: [String: String] {
-        ["api_key":"96c151da77643172f784ee17f262df9a"]
+    var apiKey: URLQueryItem {
+        URLQueryItem(name: "api_key", value: "96c151da77643172f784ee17f262df9a")
     }
 }
 
