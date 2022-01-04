@@ -9,21 +9,35 @@
 /* Begin PBXBuildFile section */
 		3724A02E27845DC3003E8C31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A02D27845DC3003E8C31 /* AppDelegate.swift */; };
 		3724A03027845DC3003E8C31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A02F27845DC3003E8C31 /* SceneDelegate.swift */; };
-		3724A03227845DC3003E8C31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A03127845DC3003E8C31 /* ViewController.swift */; };
+		3724A03227845DC3003E8C31 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A03127845DC3003E8C31 /* MainPageViewController.swift */; };
 		3724A03727845DC4003E8C31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3724A03627845DC4003E8C31 /* Assets.xcassets */; };
 		3724A03A27845DC4003E8C31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3724A03827845DC4003E8C31 /* LaunchScreen.storyboard */; };
 		3724A05F2784711E003E8C31 /* TVSeriesAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3724A05E2784711E003E8C31 /* TVSeriesAPI.framework */; };
+		3724A06627847DD5003E8C31 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06527847DD5003E8C31 /* MainPageView.swift */; };
+		3724A06827847DFA003E8C31 /* MainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06727847DFA003E8C31 /* MainPageInteractor.swift */; };
+		3724A06A27847E03003E8C31 /* MainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06927847E03003E8C31 /* MainPagePresenter.swift */; };
+		3724A06C27847E0B003E8C31 /* MainPageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06B27847E0B003E8C31 /* MainPageEntity.swift */; };
+		3724A06E27847E16003E8C31 /* MainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06D27847E16003E8C31 /* MainPageRouter.swift */; };
+		3724A07027847E53003E8C31 /* MainPageContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06F27847E53003E8C31 /* MainPageContracts.swift */; };
+		3724A07227847E5B003E8C31 /* MainPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A07127847E5B003E8C31 /* MainPageBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3724A02A27845DC3003E8C31 /* TVSeriesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVSeriesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3724A02D27845DC3003E8C31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3724A02F27845DC3003E8C31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3724A03127845DC3003E8C31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3724A03127845DC3003E8C31 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		3724A03627845DC4003E8C31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3724A03927845DC4003E8C31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3724A03B27845DC4003E8C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3724A05E2784711E003E8C31 /* TVSeriesAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TVSeriesAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3724A06527847DD5003E8C31 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
+		3724A06727847DFA003E8C31 /* MainPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageInteractor.swift; sourceTree = "<group>"; };
+		3724A06927847E03003E8C31 /* MainPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPagePresenter.swift; sourceTree = "<group>"; };
+		3724A06B27847E0B003E8C31 /* MainPageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageEntity.swift; sourceTree = "<group>"; };
+		3724A06D27847E16003E8C31 /* MainPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageRouter.swift; sourceTree = "<group>"; };
+		3724A06F27847E53003E8C31 /* MainPageContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageContracts.swift; sourceTree = "<group>"; };
+		3724A07127847E5B003E8C31 /* MainPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,12 +72,9 @@
 		3724A02C27845DC3003E8C31 /* TVSeriesApp */ = {
 			isa = PBXGroup;
 			children = (
-				3724A02D27845DC3003E8C31 /* AppDelegate.swift */,
-				3724A02F27845DC3003E8C31 /* SceneDelegate.swift */,
-				3724A03127845DC3003E8C31 /* ViewController.swift */,
-				3724A03627845DC4003E8C31 /* Assets.xcassets */,
-				3724A03827845DC4003E8C31 /* LaunchScreen.storyboard */,
-				3724A03B27845DC4003E8C31 /* Info.plist */,
+				3724A06327847D84003E8C31 /* Application */,
+				3724A06227847D0B003E8C31 /* SupportFiles */,
+				3724A06427847D9A003E8C31 /* MainPage */,
 			);
 			path = TVSeriesApp;
 			sourceTree = "<group>";
@@ -74,6 +85,40 @@
 				3724A05E2784711E003E8C31 /* TVSeriesAPI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3724A06227847D0B003E8C31 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				3724A03B27845DC4003E8C31 /* Info.plist */,
+				3724A03827845DC4003E8C31 /* LaunchScreen.storyboard */,
+				3724A03627845DC4003E8C31 /* Assets.xcassets */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		3724A06327847D84003E8C31 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				3724A02D27845DC3003E8C31 /* AppDelegate.swift */,
+				3724A02F27845DC3003E8C31 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		3724A06427847D9A003E8C31 /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				3724A06527847DD5003E8C31 /* MainPageView.swift */,
+				3724A03127845DC3003E8C31 /* MainPageViewController.swift */,
+				3724A06727847DFA003E8C31 /* MainPageInteractor.swift */,
+				3724A06927847E03003E8C31 /* MainPagePresenter.swift */,
+				3724A06B27847E0B003E8C31 /* MainPageEntity.swift */,
+				3724A06D27847E16003E8C31 /* MainPageRouter.swift */,
+				3724A06F27847E53003E8C31 /* MainPageContracts.swift */,
+				3724A07127847E5B003E8C31 /* MainPageBuilder.swift */,
+			);
+			path = MainPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,8 +191,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3724A03227845DC3003E8C31 /* ViewController.swift in Sources */,
+				3724A03227845DC3003E8C31 /* MainPageViewController.swift in Sources */,
+				3724A06E27847E16003E8C31 /* MainPageRouter.swift in Sources */,
+				3724A07027847E53003E8C31 /* MainPageContracts.swift in Sources */,
+				3724A07227847E5B003E8C31 /* MainPageBuilder.swift in Sources */,
+				3724A06C27847E0B003E8C31 /* MainPageEntity.swift in Sources */,
+				3724A06A27847E03003E8C31 /* MainPagePresenter.swift in Sources */,
+				3724A06627847DD5003E8C31 /* MainPageView.swift in Sources */,
 				3724A02E27845DC3003E8C31 /* AppDelegate.swift in Sources */,
+				3724A06827847DFA003E8C31 /* MainPageInteractor.swift in Sources */,
 				3724A03027845DC3003E8C31 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,7 +343,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FLUF4SMKRR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TVSeriesApp/Info.plist;
+				INFOPLIST_FILE = TVSeriesApp/SupportFiles/Info.plist;
 				INFOPLIST_KEY_NSMainNibFile = Main;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -319,7 +371,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FLUF4SMKRR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TVSeriesApp/Info.plist;
+				INFOPLIST_FILE = TVSeriesApp/SupportFiles/Info.plist;
 				INFOPLIST_KEY_NSMainNibFile = Main;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

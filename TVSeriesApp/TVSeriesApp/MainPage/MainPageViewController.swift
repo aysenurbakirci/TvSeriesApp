@@ -1,14 +1,13 @@
 //
-//  ViewController.swift
+//  MainPageViewController.swift
 //  TVSeriesApp
 //
 //  Created by Ayşenur Bakırcı on 4.01.2022.
 //
 
 import UIKit
-import TVSeriesAPI
 
-class ViewController: UIViewController {
+final class MainPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

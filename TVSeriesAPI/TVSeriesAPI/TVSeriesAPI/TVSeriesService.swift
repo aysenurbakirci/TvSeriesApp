@@ -8,14 +8,14 @@
 import Foundation
 
 public enum ServiceError: Error {
-    case URLCreationError
-    case RequestFailed
-    case DataTaskError(_ message: String)
-    case Unknown(_ statusCode: Int)
-    case Information(_ code: Int)
-    case Redirection(_ code: Int)
-    case ClientError(_ code: Int)
-    case ServerError(_ code: Int)
+    case urlCreationError
+    case requestFailed
+    case dataTaskError(_ message: String)
+    case unknown(_ statusCode: Int)
+    case information(_ code: Int)
+    case redirection(_ code: Int)
+    case clientError(_ code: Int)
+    case serverError(_ code: Int)
 }
 
 final public class TVSeriesService {
@@ -44,7 +44,7 @@ final public class TVSeriesService {
             print("URL: \(url)")
             return URLRequest(url: url)
         } else {
-            throw ServiceError.URLCreationError
+            throw ServiceError.urlCreationError
         }
     }
     
@@ -54,30 +54,30 @@ final public class TVSeriesService {
                                     failure: @escaping (Error?) -> ()) {
         
         guard let request = try? buildRequest(api: api) else {
-            failure(ServiceError.RequestFailed)
+            failure(ServiceError.requestFailed)
             return
         }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
-                failure(ServiceError.DataTaskError(error?.localizedDescription ?? "Error"))
+                failure(ServiceError.dataTaskError(error?.localizedDescription ?? "Error"))
                 return
             }
             
             if let data = data, let response = response as? HTTPURLResponse {
                 if (100...199).contains(response.statusCode) {
-                    failure(ServiceError.Information(response.statusCode))
+                    failure(ServiceError.information(response.statusCode))
                 } else if (200...299).contains(response.statusCode) {
                     let model = try? JSONDecoder().decode(T.self, from: data)
                     success(model)
                 } else if (300...399).contains(response.statusCode) {
-                    failure(ServiceError.Redirection(response.statusCode))
+                    failure(ServiceError.redirection(response.statusCode))
                 } else if (400...499).contains(response.statusCode) {
-                    failure(ServiceError.ClientError(response.statusCode))
+                    failure(ServiceError.clientError(response.statusCode))
                 } else if (500...599).contains(response.statusCode) {
-                    failure(ServiceError.ServerError(response.statusCode))
+                    failure(ServiceError.serverError(response.statusCode))
                 } else {
-                    failure(ServiceError.Unknown(response.statusCode))
+                    failure(ServiceError.unknown(response.statusCode))
                 }
             }
         }
