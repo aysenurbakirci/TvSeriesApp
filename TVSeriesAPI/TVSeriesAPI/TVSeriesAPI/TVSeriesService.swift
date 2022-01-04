@@ -45,30 +45,32 @@ final class TVSeriesService {
     }
     
     private func load<T: Decodable>(api: API,
+                                    model: T.Type,
                                     success: @escaping (T?) -> (),
                                     failure: @escaping (Error?) -> ()) {
         
         guard let request = try? buildRequest(api: api) else {
-            completion(nil, ServiceError.RequestFailed)
+            failure(ServiceError.RequestFailed)
             return
         }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let error == nil else {
-                failure(ServiceError.DataTaskError(error.localizedDescription))
+            guard error == nil else {
+                failure(ServiceError.DataTaskError(error?.localizedDescription ?? "Error"))
+                return
             }
             
             if let data = data, let response = response as? HTTPURLResponse {
-                if response.statusCode == 100...200 {
+                if (100...200).contains(response.statusCode) {
                     failure(ServiceError.Information(response.statusCode))
-                } else if response.statusCode == 200...300 {
+                } else if (200...300).contains(response.statusCode) {
                     let model = try? JSONDecoder().decode(T.self, from: data)
                     success(model)
-                } else if response.statusCode == 300...400 {
+                } else if (300...400).contains(response.statusCode) {
                     failure(ServiceError.Redirection(response.statusCode))
-                } else if response.statusCode = 400...500 {
+                } else if (400...500).contains(response.statusCode) {
                     failure(ServiceError.ClientError(response.statusCode))
-                } else if response.statusCode = 500...600 {
+                } else if (500...600).contains(response.statusCode) {
                     failure(ServiceError.ServerError(response.statusCode))
                 } else {
                     failure(ServiceError.Unknown(response.statusCode))
@@ -79,18 +81,18 @@ final class TVSeriesService {
     }
 }
 
-public extension TVSeriesService {
+extension TVSeriesService {
     
-    func getPopularTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
-        let data: TvSeries = load(api: TVSeriesAPI.popular(page: page)) { data in
+    public func getPopularTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
+        load(api: TVSeriesAPI.popular(page: page), model: TvSeries.self) { data in
             success(data)
         } failure: { error in
             failure(error)
         }
     }
     
-    func getTopRatedTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
-        let data: TvSeries = load(api: TVSeriesAPI.topRated(page: page)) { data in
+    public func getTopRatedTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
+        load(api: TVSeriesAPI.topRated(page: page), model: TvSeries.self) { data in
             success(data)
         } failure: { error in
             failure(error)

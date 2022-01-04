@@ -39,7 +39,7 @@ enum TVSeriesAPI: API {
     
     case topRated(page: Int), popular(page: Int)
 
-    public var path: String {
+    var path: String {
         switch self {
         case .popular(_):
             return "/tv/popular"
