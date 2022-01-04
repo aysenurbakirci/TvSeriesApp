@@ -20,6 +20,8 @@
 		3724A06E27847E16003E8C31 /* MainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06D27847E16003E8C31 /* MainPageRouter.swift */; };
 		3724A07027847E53003E8C31 /* MainPageContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06F27847E53003E8C31 /* MainPageContracts.swift */; };
 		3724A07227847E5B003E8C31 /* MainPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A07127847E5B003E8C31 /* MainPageBuilder.swift */; };
+		3724A075278480C5003E8C31 /* ListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A074278480C5003E8C31 /* ListCellView.swift */; };
+		3724A077278482E9003E8C31 /* ListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A076278482E9003E8C31 /* ListTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		3724A06D27847E16003E8C31 /* MainPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageRouter.swift; sourceTree = "<group>"; };
 		3724A06F27847E53003E8C31 /* MainPageContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageContracts.swift; sourceTree = "<group>"; };
 		3724A07127847E5B003E8C31 /* MainPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageBuilder.swift; sourceTree = "<group>"; };
+		3724A074278480C5003E8C31 /* ListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellView.swift; sourceTree = "<group>"; };
+		3724A076278482E9003E8C31 /* ListTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 			children = (
 				3724A06327847D84003E8C31 /* Application */,
 				3724A06227847D0B003E8C31 /* SupportFiles */,
+				3724A073278480B4003E8C31 /* Cell */,
 				3724A06427847D9A003E8C31 /* MainPage */,
 			);
 			path = TVSeriesApp;
@@ -119,6 +124,15 @@
 				3724A07127847E5B003E8C31 /* MainPageBuilder.swift */,
 			);
 			path = MainPage;
+			sourceTree = "<group>";
+		};
+		3724A073278480B4003E8C31 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3724A074278480C5003E8C31 /* ListCellView.swift */,
+				3724A076278482E9003E8C31 /* ListTableCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,8 +211,10 @@
 				3724A07227847E5B003E8C31 /* MainPageBuilder.swift in Sources */,
 				3724A06C27847E0B003E8C31 /* MainPageEntity.swift in Sources */,
 				3724A06A27847E03003E8C31 /* MainPagePresenter.swift in Sources */,
+				3724A075278480C5003E8C31 /* ListCellView.swift in Sources */,
 				3724A06627847DD5003E8C31 /* MainPageView.swift in Sources */,
 				3724A02E27845DC3003E8C31 /* AppDelegate.swift in Sources */,
+				3724A077278482E9003E8C31 /* ListTableCell.swift in Sources */,
 				3724A06827847DFA003E8C31 /* MainPageInteractor.swift in Sources */,
 				3724A03027845DC3003E8C31 /* SceneDelegate.swift in Sources */,
 			);
