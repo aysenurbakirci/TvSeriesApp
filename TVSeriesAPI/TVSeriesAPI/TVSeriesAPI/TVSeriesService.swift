@@ -78,3 +78,22 @@ final class TVSeriesService {
         .resume()
     }
 }
+
+public extension TVSeriesService {
+    
+    func getPopularTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
+        let data: TvSeries = load(api: TVSeriesAPI.popular(page: page)) { data in
+            success(data)
+        } failure: { error in
+            failure(error)
+        }
+    }
+    
+    func getTopRatedTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
+        let data: TvSeries = load(api: TVSeriesAPI.topRated(page: page)) { data in
+            success(data)
+        } failure: { error in
+            failure(error)
+        }
+    }
+}
