@@ -9,12 +9,18 @@
 /* Begin PBXBuildFile section */
 		3724A050278460D5003E8C31 /* TVSeriesAPI.docc in Sources */ = {isa = PBXBuildFile; fileRef = 3724A04F278460D5003E8C31 /* TVSeriesAPI.docc */; };
 		3724A051278460D5003E8C31 /* TVSeriesAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3724A04E278460D5003E8C31 /* TVSeriesAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3724A058278463C7003E8C31 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A057278463C7003E8C31 /* API.swift */; };
+		3724A05A278463E1003E8C31 /* TVSeriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A059278463E1003E8C31 /* TVSeriesModel.swift */; };
+		3724A05C278463F8003E8C31 /* TVSeriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A05B278463F8003E8C31 /* TVSeriesService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3724A04B278460D5003E8C31 /* TVSeriesAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TVSeriesAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3724A04E278460D5003E8C31 /* TVSeriesAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVSeriesAPI.h; sourceTree = "<group>"; };
 		3724A04F278460D5003E8C31 /* TVSeriesAPI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = TVSeriesAPI.docc; sourceTree = "<group>"; };
+		3724A057278463C7003E8C31 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		3724A059278463E1003E8C31 /* TVSeriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSeriesModel.swift; sourceTree = "<group>"; };
+		3724A05B278463F8003E8C31 /* TVSeriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSeriesService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +53,9 @@
 		3724A04D278460D5003E8C31 /* TVSeriesAPI */ = {
 			isa = PBXGroup;
 			children = (
+				3724A057278463C7003E8C31 /* API.swift */,
+				3724A059278463E1003E8C31 /* TVSeriesModel.swift */,
+				3724A05B278463F8003E8C31 /* TVSeriesService.swift */,
 				3724A04E278460D5003E8C31 /* TVSeriesAPI.h */,
 				3724A04F278460D5003E8C31 /* TVSeriesAPI.docc */,
 			);
@@ -132,6 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3724A058278463C7003E8C31 /* API.swift in Sources */,
+				3724A05A278463E1003E8C31 /* TVSeriesModel.swift in Sources */,
+				3724A05C278463F8003E8C31 /* TVSeriesService.swift in Sources */,
 				3724A050278460D5003E8C31 /* TVSeriesAPI.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
