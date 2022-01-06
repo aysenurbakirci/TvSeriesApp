@@ -8,31 +8,28 @@
 import Foundation
 
 // MARK: - TvSeries
-struct TvSeries: Codable {
-    let page: Int
-    let results: [Result]
-    let totalPages, totalResults: Int
+public struct APIModel: Codable {
+    public let page: Int
+    public let results: [TVSeries]
+    public let totalPages: Int
 
     enum CodingKeys: String, CodingKey {
         case page, results
         case totalPages = "total_pages"
-        case totalResults = "total_results"
     }
 }
 
 // MARK: - Result
-struct Result: Codable {
+public struct TVSeries: Codable {
     let id: Int
-    let name: String
-    let overview: String
-    let posterPath: String
-    let voteAverage: Double
-    let voteCount: Int
+    public let name: String
+    public let overview: String
+    public let posterPath: String
+    public let voteAverage: Double
 
     enum CodingKeys: String, CodingKey {
         case id, name, overview
         case posterPath = "poster_path"
         case voteAverage = "vote_average"
-        case voteCount = "vote_count"
     }
 }
