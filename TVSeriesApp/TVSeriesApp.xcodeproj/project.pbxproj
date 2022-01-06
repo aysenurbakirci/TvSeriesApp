@@ -16,7 +16,6 @@
 		3724A06627847DD5003E8C31 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06527847DD5003E8C31 /* MainPageView.swift */; };
 		3724A06827847DFA003E8C31 /* MainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06727847DFA003E8C31 /* MainPageInteractor.swift */; };
 		3724A06A27847E03003E8C31 /* MainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06927847E03003E8C31 /* MainPagePresenter.swift */; };
-		3724A06C27847E0B003E8C31 /* MainPageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06B27847E0B003E8C31 /* MainPageEntity.swift */; };
 		3724A06E27847E16003E8C31 /* MainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06D27847E16003E8C31 /* MainPageRouter.swift */; };
 		3724A07027847E53003E8C31 /* MainPageContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A06F27847E53003E8C31 /* MainPageContracts.swift */; };
 		3724A07227847E5B003E8C31 /* MainPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A07127847E5B003E8C31 /* MainPageBuilder.swift */; };
@@ -37,7 +36,6 @@
 		3724A06527847DD5003E8C31 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
 		3724A06727847DFA003E8C31 /* MainPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageInteractor.swift; sourceTree = "<group>"; };
 		3724A06927847E03003E8C31 /* MainPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPagePresenter.swift; sourceTree = "<group>"; };
-		3724A06B27847E0B003E8C31 /* MainPageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageEntity.swift; sourceTree = "<group>"; };
 		3724A06D27847E16003E8C31 /* MainPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageRouter.swift; sourceTree = "<group>"; };
 		3724A06F27847E53003E8C31 /* MainPageContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageContracts.swift; sourceTree = "<group>"; };
 		3724A07127847E5B003E8C31 /* MainPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageBuilder.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 				3724A03127845DC3003E8C31 /* MainPageViewController.swift */,
 				3724A06727847DFA003E8C31 /* MainPageInteractor.swift */,
 				3724A06927847E03003E8C31 /* MainPagePresenter.swift */,
-				3724A06B27847E0B003E8C31 /* MainPageEntity.swift */,
 				3724A06D27847E16003E8C31 /* MainPageRouter.swift */,
 				3724A06F27847E53003E8C31 /* MainPageContracts.swift */,
 				3724A07127847E5B003E8C31 /* MainPageBuilder.swift */,
@@ -228,7 +225,6 @@
 				3724A06E27847E16003E8C31 /* MainPageRouter.swift in Sources */,
 				3724A07027847E53003E8C31 /* MainPageContracts.swift in Sources */,
 				3724A07227847E5B003E8C31 /* MainPageBuilder.swift in Sources */,
-				3724A06C27847E0B003E8C31 /* MainPageEntity.swift in Sources */,
 				3724A06A27847E03003E8C31 /* MainPagePresenter.swift in Sources */,
 				3724A075278480C5003E8C31 /* ListCellView.swift in Sources */,
 				3724A06627847DD5003E8C31 /* MainPageView.swift in Sources */,

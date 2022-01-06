@@ -90,7 +90,7 @@ public extension TVSeriesService {
     static func getPopularTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
         let service = TVSeriesService()
         
-        service.load(api: TVSeriesAPI.popular(page: page), model: TvSeries.self) { data in
+        service.load(api: TVSeriesAPI.popular(page: page), model: APIModel.self) { data in
             success(data)
         } failure: { error in
             failure(error)
@@ -100,7 +100,7 @@ public extension TVSeriesService {
     static func getTopRatedTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
         let service = TVSeriesService()
         
-        service.load(api: TVSeriesAPI.topRated(page: page), model: TvSeries.self) { data in
+        service.load(api: TVSeriesAPI.topRated(page: page), model: APIModel.self) { data in
             success(data)
         } failure: { error in
             failure(error)

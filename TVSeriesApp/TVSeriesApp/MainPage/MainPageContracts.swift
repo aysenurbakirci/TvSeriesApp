@@ -5,4 +5,44 @@
 //  Created by Ayşenur Bakırcı on 4.01.2022.
 //
 
-import Foundation
+import struct TVSeriesAPI.TVSeries
+
+//MARK: - Interactor
+protocol MainPageInteractorProtocol: AnyObject {
+    var delegate: MainPageInteractorDelegate? { get set }
+    func load()
+}
+
+struct MainPageInteractorOutput {
+    var setLoading: Bool
+    var showList: [TVSeries]
+}
+
+protocol MainPageInteractorDelegate: AnyObject {
+    func handleOutput(_ output: MainPageInteractorOutput)
+}
+
+//MARK: - Presenter
+protocol MainPagePresenterProtocol: AnyObject {
+    func load()
+}
+
+struct MainPagePresenterOutput {
+    var setLoading: Bool
+    var showList: [TVSeries]
+}
+
+//MARK: - View
+protocol MainPageViewProtocol: AnyObject {
+    func handleOutput(_ output: MainPagePresenterOutput)
+}
+
+//MARK: - Router
+enum MainPageRoute {
+    case voteAlert(vote: Double)
+    case showImage(image: String)
+}
+
+protocol MainPageRouterProtocol: AnyObject {
+    func navigate(to route: MainPageRoute)
+}
