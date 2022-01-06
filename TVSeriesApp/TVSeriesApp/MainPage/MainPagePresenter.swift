@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+final class MainPagePresenter: MainPagePresenterProtocol {
+    
+    func load() {
+        
+    }
+}
+
+extension MainPagePresenter: MainPageInteractorDelegate {
+    
+    func handleOutput(_ output: MainPageInteractorOutput) {
+        
+    }
+}

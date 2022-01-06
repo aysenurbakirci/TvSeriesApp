@@ -13,9 +13,9 @@ protocol MainPageInteractorProtocol: AnyObject {
     func load()
 }
 
-struct MainPageInteractorOutput {
-    var setLoading: Bool
-    var showList: [TVSeries]
+enum MainPageInteractorOutput {
+    case setLoading(Bool)
+    case showList([TVSeries])
 }
 
 protocol MainPageInteractorDelegate: AnyObject {

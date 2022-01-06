@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+final class MainPageRouter: MainPageRouterProtocol {
+    
+    func navigate(to route: MainPageRoute) {
+        
+    }
+}

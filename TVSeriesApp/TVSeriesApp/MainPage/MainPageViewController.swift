@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainPageViewController: UIViewController {
+final class MainPageViewController: UIViewController, MainPageViewProtocol {
 
     private lazy var mainView: MainPageView = {
         let view = MainPageView()
@@ -36,3 +36,9 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension MainPageViewController {
+    
+    func handleOutput(_ output: MainPagePresenterOutput) {
+        
+    }
+}

@@ -85,22 +85,18 @@ final public class TVSeriesService {
     }
 }
 
-public extension TVSeriesService {
+extension TVSeriesService: TVSeriesServiceProtocol {
     
-    static func getPopularTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
-        let service = TVSeriesService()
-        
-        service.load(api: TVSeriesAPI.popular(page: page), model: APIModel.self) { data in
+    public func getPopularTVSeries(page: Int, success: @escaping (APIModel?) -> (), failure: @escaping (Error?) -> ()) {
+        load(api: TVSeriesAPI.popular(page: page), model: APIModel.self) { data in
             success(data)
         } failure: { error in
             failure(error)
         }
     }
     
-    static func getTopRatedTVSeries(page: Int, success: @escaping (Decodable?) -> (), failure: @escaping (Error?) -> ()) {
-        let service = TVSeriesService()
-        
-        service.load(api: TVSeriesAPI.topRated(page: page), model: APIModel.self) { data in
+    public func getTopRatedTVSeries(page: Int, success: @escaping (APIModel?) -> (), failure: @escaping (Error?) -> ()) {
+        load(api: TVSeriesAPI.topRated(page: page), model: APIModel.self) { data in
             success(data)
         } failure: { error in
             failure(error)
