@@ -9,6 +9,7 @@ import UIKit
 
 final class MainPageViewController: UIViewController, MainPageViewProtocol {
 
+    //MARK: Properties
     private lazy var mainView: MainPageView = {
         let view = MainPageView()
         view.tableView.delegate = self
@@ -16,12 +17,14 @@ final class MainPageViewController: UIViewController, MainPageViewProtocol {
         return view
     }()
 
+    //MARK: - Initalization
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
     }
 }
 
+//MARK: - TableView Delegate, DataSource
 extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,6 +41,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainPageViewController {
     
+    //MARK: - Presenter Output
     func handleOutput(_ output: MainPagePresenterOutput) {
         
     }

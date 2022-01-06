@@ -5,10 +5,15 @@
 //  Created by Ayşenur Bakırcı on 4.01.2022.
 //
 
+/** View is both displays information for the user and detects user interaction.
+ The Presenter is the only module the View module has contact with.
+ In this project, view and viewcontroller classes are View together. **/
+
 import UIKit
 
 final class MainPageView: UIView {
     
+    //MARK: - Properties
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ListTableCell.self, forCellReuseIdentifier: ListTableCell.reuseIdentifier)
@@ -20,6 +25,7 @@ final class MainPageView: UIView {
         return segment
     }()
     
+    //MARK: - Initalization
     override init(frame: CGRect) {
         super.init(frame: .zero)
         

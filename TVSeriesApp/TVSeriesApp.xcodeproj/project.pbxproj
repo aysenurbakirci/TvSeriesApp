@@ -117,8 +117,8 @@
 			children = (
 				3724A06527847DD5003E8C31 /* MainPageView.swift */,
 				3724A03127845DC3003E8C31 /* MainPageViewController.swift */,
-				3724A06727847DFA003E8C31 /* MainPageInteractor.swift */,
 				3724A06927847E03003E8C31 /* MainPagePresenter.swift */,
+				3724A06727847DFA003E8C31 /* MainPageInteractor.swift */,
 				3724A06D27847E16003E8C31 /* MainPageRouter.swift */,
 				3724A06F27847E53003E8C31 /* MainPageContracts.swift */,
 				3724A07127847E5B003E8C31 /* MainPageBuilder.swift */,
