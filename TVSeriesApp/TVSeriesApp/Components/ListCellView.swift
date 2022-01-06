@@ -40,16 +40,21 @@ final class ListCellView: UIView {
         return stack
     }()
     
-    init(imageSize: CGRect) {
+    init(cellHight: Float, cellRatio: Float) {
         super.init(frame: .zero)
         
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10.0).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: imageSize.width).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: imageSize.height).isActive = true
+        imageView.topAnchor
+            .constraint(equalTo: topAnchor).isActive = true
+        imageView.bottomAnchor
+            .constraint(equalTo: bottomAnchor).isActive = true
+        imageView.leadingAnchor
+            .constraint(equalTo: leadingAnchor, constant: 10.0).isActive = true
+        imageView.widthAnchor
+            .constraint(equalToConstant: CGFloat(cellHight * cellRatio)).isActive = true
+        imageView.heightAnchor
+            .constraint(equalToConstant: CGFloat(cellHight)).isActive = true
         
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false

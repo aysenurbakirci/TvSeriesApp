@@ -11,7 +11,7 @@ final class ListTableCell: UITableViewCell {
     
     static let reuseIdentifier = "ListTableCell"
     
-    private lazy var cellView = ListCellView(imageSize: .init(x: 0.0, y: 0.0, width: 80.0, height: 80.0))
+    private lazy var cellView = ListCellView(cellHight: 80.0, cellRatio: 1.2)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
