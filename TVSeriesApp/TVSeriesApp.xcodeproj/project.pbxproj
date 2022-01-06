@@ -22,6 +22,7 @@
 		3724A07227847E5B003E8C31 /* MainPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A07127847E5B003E8C31 /* MainPageBuilder.swift */; };
 		3724A075278480C5003E8C31 /* ListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A074278480C5003E8C31 /* ListCellView.swift */; };
 		3724A077278482E9003E8C31 /* ListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A076278482E9003E8C31 /* ListTableCell.swift */; };
+		37AC912F27872D9700197266 /* ListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC912E27872D9700197266 /* ListCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		3724A07127847E5B003E8C31 /* MainPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageBuilder.swift; sourceTree = "<group>"; };
 		3724A074278480C5003E8C31 /* ListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellView.swift; sourceTree = "<group>"; };
 		3724A076278482E9003E8C31 /* ListTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableCell.swift; sourceTree = "<group>"; };
+		37AC912E27872D9700197266 /* ListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +140,18 @@
 		37AC912C27872CC000197266 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				3724A074278480C5003E8C31 /* ListCellView.swift */,
+				37AC912D27872D8500197266 /* ListCellView */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		37AC912D27872D8500197266 /* ListCellView */ = {
+			isa = PBXGroup;
+			children = (
+				3724A074278480C5003E8C31 /* ListCellView.swift */,
+				37AC912E27872D9700197266 /* ListCellViewModel.swift */,
+			);
+			path = ListCellView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +233,7 @@
 				3724A075278480C5003E8C31 /* ListCellView.swift in Sources */,
 				3724A06627847DD5003E8C31 /* MainPageView.swift in Sources */,
 				3724A02E27845DC3003E8C31 /* AppDelegate.swift in Sources */,
+				37AC912F27872D9700197266 /* ListCellViewModel.swift in Sources */,
 				3724A077278482E9003E8C31 /* ListTableCell.swift in Sources */,
 				3724A06827847DFA003E8C31 /* MainPageInteractor.swift in Sources */,
 				3724A03027845DC3003E8C31 /* SceneDelegate.swift in Sources */,

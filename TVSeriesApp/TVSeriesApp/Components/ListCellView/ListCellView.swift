@@ -12,21 +12,18 @@ final class ListCellView: UIView {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "tree")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     private lazy var title: UILabel = {
         let label = UILabel()
-        label.text = "Title"
         label.font = .boldSystemFont(ofSize: 14)
         return label
     }()
     
     private lazy var overview: UILabel = {
         let overview = UILabel()
-        overview.text = "Overview"
         overview.font = .systemFont(ofSize: 12)
         overview.textColor = .darkGray
         return overview
@@ -58,11 +55,19 @@ final class ListCellView: UIView {
         
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10.0).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
+        stackView.leadingAnchor
+            .constraint(equalTo: imageView.trailingAnchor, constant: 10.0).isActive = true
+        stackView.centerYAnchor
+            .constraint(equalTo: imageView.centerYAnchor).isActive = true
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func applyModel(_ model: ListCellViewModel) {
+        imageView.image = model.image
+        title.text = model.title
+        overview.text = model.overview
     }
 }
