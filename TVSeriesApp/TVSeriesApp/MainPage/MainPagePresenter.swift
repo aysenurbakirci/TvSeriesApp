@@ -12,9 +12,9 @@
 import Foundation
 
 final class MainPagePresenter: MainPagePresenterProtocol {
-    
+
     //MARK: - Load
-    func load() {
+    func load(page: Int) {
         
     }
 }

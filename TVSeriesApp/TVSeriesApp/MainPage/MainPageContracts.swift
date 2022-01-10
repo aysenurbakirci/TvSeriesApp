@@ -8,7 +8,8 @@
 import TVSeriesAPI
 
 enum MainPageSegments {
-    case popular([TVSeries]), topRated([TVSeries])
+    case popular([TVSeries])
+    case topRated([TVSeries])
 }
 
 //MARK: - Interactor
@@ -19,6 +20,7 @@ protocol MainPageInteractorProtocol: AnyObject {
 
 enum MainPageInteractorOutput {
     case setLoading(Bool)
+    case setError(Error)
     case showList(MainPageSegments)
 }
 
@@ -28,12 +30,12 @@ protocol MainPageInteractorDelegate: AnyObject {
 
 //MARK: - Presenter
 protocol MainPagePresenterProtocol: AnyObject {
-    func load(page: Int, segment: MainPageSegments)
+    func load(page: Int)
 }
 
-struct MainPagePresenterOutput {
-    var setLoading: Bool
-    var showList: MainPageSegments
+enum MainPagePresenterOutput {
+    case setLoading(Bool)
+    case showList(MainPageSegments)
 }
 
 //MARK: - View
