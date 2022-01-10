@@ -10,7 +10,6 @@
 import TVSeriesAPI
 
 final class MainPageInteractor: MainPageInteractorProtocol {
-    
     //MARK: - Properties
     weak var delegate: MainPageInteractorDelegate?
     
@@ -22,18 +21,23 @@ final class MainPageInteractor: MainPageInteractorProtocol {
     }
     
     //MARK: - Load
-    func load() {
+    func load(page: Int) {
         delegate?.handleOutput(.setLoading(true))
         
-        service.getPopularTVSeries(page: 1) { [weak self] data in
-            guard let self = self, let list = data?.results else { return }
-            self.delegate?.handleOutput(.setLoading(false))
-            self.delegate?.handleOutput(.showList(list))
-        } failure: { [weak self] error in
+        service.getPopularTVSeries(page: page) { [weak self] result in
             guard let self = self else { return }
-            self.delegate?.handleOutput(.setLoading(false))
-            print(error?.localizedDescription ?? "ERROR")
+            
+            switch result {
+            case let .failure(error):
+                self.delegate?.handleOutput(.setLoading(false))
+                print(error.localizedDescription)
+            case let .success(model):
+                self.delegate?.handleOutput(.setLoading(false))
+                self.delegate?.handleOutput(.showList(model.results))
+            }
         }
+        
+        
 
     }
 }

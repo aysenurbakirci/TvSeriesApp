@@ -20,12 +20,6 @@ final class MainPageView: UIView {
         return tableView
     }()
     
-    let segmentControl: UISegmentedControl = {
-        let segment = UISegmentedControl()
-        segment.numberOfSegments = 
-        return segment
-    }()
-    
     //MARK: - Initalization
     override init(frame: CGRect) {
         super.init(frame: .zero)

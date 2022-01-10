@@ -5,17 +5,21 @@
 //  Created by Ayşenur Bakırcı on 4.01.2022.
 //
 
-import struct TVSeriesAPI.TVSeries
+import TVSeriesAPI
+
+enum MainPageSegments {
+    case popular([TVSeries]), topRated([TVSeries])
+}
 
 //MARK: - Interactor
 protocol MainPageInteractorProtocol: AnyObject {
     var delegate: MainPageInteractorDelegate? { get set }
-    func load()
+    func load(page: Int, segment: MainPageSegments)
 }
 
 enum MainPageInteractorOutput {
     case setLoading(Bool)
-    case showList([TVSeries])
+    case showList(MainPageSegments)
 }
 
 protocol MainPageInteractorDelegate: AnyObject {
@@ -24,12 +28,12 @@ protocol MainPageInteractorDelegate: AnyObject {
 
 //MARK: - Presenter
 protocol MainPagePresenterProtocol: AnyObject {
-    func load()
+    func load(page: Int, segment: MainPageSegments)
 }
 
 struct MainPagePresenterOutput {
     var setLoading: Bool
-    var showList: [TVSeries]
+    var showList: MainPageSegments
 }
 
 //MARK: - View
@@ -39,8 +43,7 @@ protocol MainPageViewProtocol: AnyObject {
 
 //MARK: - Router
 enum MainPageRoute {
-    case voteAlert(vote: Double)
-    case showImage(image: String)
+    case showError(_ error: Error)
 }
 
 protocol MainPageRouterProtocol: AnyObject {
