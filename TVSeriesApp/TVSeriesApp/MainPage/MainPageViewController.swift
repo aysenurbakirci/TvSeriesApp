@@ -20,6 +20,7 @@ final class MainPageViewController: UIViewController, MainPageViewProtocol {
     //MARK: - Initalization
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.titleView = mainView.segmentControl
         view = mainView
     }
 }

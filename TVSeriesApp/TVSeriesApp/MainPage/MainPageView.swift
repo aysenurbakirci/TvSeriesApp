@@ -17,7 +17,13 @@ final class MainPageView: UIView {
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ListTableCell.self, forCellReuseIdentifier: ListTableCell.reuseIdentifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
+    }()
+    
+    let segmentControl: UISegmentedControl = {
+        let segmentControl = UISegmentedControl(items: MainPageSegments.allCases)
+        return segmentControl
     }()
     
     //MARK: - Initalization
@@ -25,11 +31,12 @@ final class MainPageView: UIView {
         super.init(frame: .zero)
         
         addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
     }
     
     required init?(coder: NSCoder) {

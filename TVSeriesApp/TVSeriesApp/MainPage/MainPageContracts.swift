@@ -8,8 +8,11 @@
 import TVSeriesAPI
 
 enum MainPageSegments {
-    case popular([TVSeries])
-    case topRated([TVSeries])
+    //Use CaseIterable
+    case popular([TVSeries]), topRated([TVSeries])
+    
+    static var allCases = ["Popular", "Top Rated"]
+    static var defaultSegment = MainPageSegments.popular([])
 }
 
 //MARK: - Interactor
