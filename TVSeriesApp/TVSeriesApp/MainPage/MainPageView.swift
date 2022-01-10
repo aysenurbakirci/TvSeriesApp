@@ -22,6 +22,7 @@ final class MainPageView: UIView {
     
     let segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl()
+        segment.numberOfSegments = 
         return segment
     }()
     

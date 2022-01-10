@@ -7,17 +7,6 @@
 
 import Foundation
 
-public enum ServiceError: Error {
-    case urlCreationError
-    case requestFailed
-    case dataTaskError(_ message: String)
-    case unknown(_ statusCode: Int)
-    case information(_ code: Int)
-    case redirection(_ code: Int)
-    case clientError(_ code: Int)
-    case serverError(_ code: Int)
-}
-
 final public class TVSeriesService {
     
     private func buildRequest(api: API) throws -> URLRequest {
@@ -48,36 +37,30 @@ final public class TVSeriesService {
         }
     }
     
-    private func load<T: Decodable>(api: API,
-                                    model: T.Type,
-                                    success: @escaping (T?) -> (),
-                                    failure: @escaping (Error?) -> ()) {
+    private func load<T: Decodable>(_ tType: T.Type,
+                                    api: API,
+                                    completion: @escaping (Result<T, Error>) -> ()) {
         
         guard let request = try? buildRequest(api: api) else {
-            failure(ServiceError.requestFailed)
+            completion(.failure(ServiceError.requestFailed))
             return
         }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
-                failure(ServiceError.dataTaskError(error?.localizedDescription ?? "Error"))
+                completion(.failure(ServiceError.dataTaskError(error?.localizedDescription ?? "Error")))
                 return
             }
             
             if let data = data, let response = response as? HTTPURLResponse {
-                if (100...199).contains(response.statusCode) {
-                    failure(ServiceError.information(response.statusCode))
-                } else if (200...299).contains(response.statusCode) {
-                    let model = try? JSONDecoder().decode(T.self, from: data)
-                    success(model)
-                } else if (300...399).contains(response.statusCode) {
-                    failure(ServiceError.redirection(response.statusCode))
-                } else if (400...499).contains(response.statusCode) {
-                    failure(ServiceError.clientError(response.statusCode))
-                } else if (500...599).contains(response.statusCode) {
-                    failure(ServiceError.serverError(response.statusCode))
+                if (200...299).contains(response.statusCode) {
+                    guard let model = try? JSONDecoder().decode(T.self, from: data) else {
+                        completion(.failure(ServiceError.decodeError))
+                        return
+                    }
+                    completion(.success(model))
                 } else {
-                    failure(ServiceError.unknown(response.statusCode))
+                    completion(.failure(ServiceError.decideError(response.statusCode)))
                 }
             }
         }
@@ -87,19 +70,15 @@ final public class TVSeriesService {
 
 extension TVSeriesService: TVSeriesServiceProtocol {
     
-    public func getPopularTVSeries(page: Int, success: @escaping (APIModel?) -> (), failure: @escaping (Error?) -> ()) {
-        load(api: TVSeriesAPI.popular(page: page), model: APIModel.self) { data in
-            success(data)
-        } failure: { error in
-            failure(error)
+    public func getPopularTVSeries(page: Int, completion: @escaping (Result<APIModel, Error>) -> ()) {
+        load(APIModel.self, api: TVSeriesAPI.popular(page: page)) { result in
+            completion(result)
         }
     }
     
-    public func getTopRatedTVSeries(page: Int, success: @escaping (APIModel?) -> (), failure: @escaping (Error?) -> ()) {
-        load(api: TVSeriesAPI.topRated(page: page), model: APIModel.self) { data in
-            success(data)
-        } failure: { error in
-            failure(error)
+    public func getTopRatedTVSeries(page: Int, completion: @escaping (Result<APIModel, Error>) -> ()) {
+        load(APIModel.self, api: TVSeriesAPI.topRated(page: page)) { result in
+            completion(result)
         }
     }
 }

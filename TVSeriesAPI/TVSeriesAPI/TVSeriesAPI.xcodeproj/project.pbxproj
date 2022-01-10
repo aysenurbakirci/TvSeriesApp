@@ -12,6 +12,7 @@
 		3724A058278463C7003E8C31 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A057278463C7003E8C31 /* API.swift */; };
 		3724A05A278463E1003E8C31 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A059278463E1003E8C31 /* APIModel.swift */; };
 		3724A05C278463F8003E8C31 /* TVSeriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A05B278463F8003E8C31 /* TVSeriesService.swift */; };
+		37420C89278C89DD0003E1A4 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37420C88278C89DD0003E1A4 /* ServiceError.swift */; };
 		37AC91332787447B00197266 /* TVSeriesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AC91322787447B00197266 /* TVSeriesServiceProtocol.swift */; };
 /* End PBXBuildFile section */
 
@@ -22,6 +23,7 @@
 		3724A057278463C7003E8C31 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3724A059278463E1003E8C31 /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		3724A05B278463F8003E8C31 /* TVSeriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSeriesService.swift; sourceTree = "<group>"; };
+		37420C88278C89DD0003E1A4 /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
 		37AC91322787447B00197266 /* TVSeriesServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSeriesServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,10 +57,11 @@
 		3724A04D278460D5003E8C31 /* TVSeriesAPI */ = {
 			isa = PBXGroup;
 			children = (
-				3724A057278463C7003E8C31 /* API.swift */,
 				3724A059278463E1003E8C31 /* APIModel.swift */,
+				3724A057278463C7003E8C31 /* API.swift */,
 				3724A05B278463F8003E8C31 /* TVSeriesService.swift */,
 				37AC91322787447B00197266 /* TVSeriesServiceProtocol.swift */,
+				37420C88278C89DD0003E1A4 /* ServiceError.swift */,
 				3724A04E278460D5003E8C31 /* TVSeriesAPI.h */,
 				3724A04F278460D5003E8C31 /* TVSeriesAPI.docc */,
 			);
@@ -144,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37420C89278C89DD0003E1A4 /* ServiceError.swift in Sources */,
 				3724A058278463C7003E8C31 /* API.swift in Sources */,
 				37AC91332787447B00197266 /* TVSeriesServiceProtocol.swift in Sources */,
 				3724A05A278463E1003E8C31 /* APIModel.swift in Sources */,
