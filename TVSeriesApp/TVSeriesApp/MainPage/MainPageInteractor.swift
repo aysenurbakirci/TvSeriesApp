@@ -22,38 +22,19 @@ final class MainPageInteractor: MainPageInteractorProtocol {
     }
     
     //MARK: - Load
-    func load(page: Int, segment: MainPageSegments) {
+    func load(page: Int) {
+        delegate?.handleOutput(.setLoading(true))
         
-        switch segment {
-        case .popular(_):
-            delegate?.handleOutput(.setLoading(true))
+        service.getTopRatedTVSeries(page: page) { [weak self] result in
+            guard let self = self else { return }
             
-            service.getPopularTVSeries(page: page) { [weak self] result in
-                guard let self = self else { return }
-                
-                switch result {
-                case let .failure(error):
-                    self.delegate?.handleOutput(.setLoading(false))
-                    self.delegate?.handleOutput(.setError(error))
-                case let .success(model):
-                    self.delegate?.handleOutput(.setLoading(false))
-                    self.delegate?.handleOutput(.showList(.popular(model.results)))
-                }
-            }
-        case .topRated(_):
-            delegate?.handleOutput(.setLoading(true))
-            
-            service.getTopRatedTVSeries(page: page) { [weak self] result in
-                guard let self = self else { return }
-                
-                switch result {
-                case let .failure(error):
-                    self.delegate?.handleOutput(.setLoading(false))
-                    self.delegate?.handleOutput(.setError(error))
-                case let .success(model):
-                    self.delegate?.handleOutput(.setLoading(false))
-                    self.delegate?.handleOutput(.showList(.topRated(model.results)))
-                }
+            switch result {
+            case let .failure(error):
+                self.delegate?.handleOutput(.setLoading(false))
+                self.delegate?.handleOutput(.setError(error))
+            case let .success(model):
+                self.delegate?.handleOutput(.setLoading(false))
+                self.delegate?.handleOutput(.showList(model.results))
             }
         }
     }

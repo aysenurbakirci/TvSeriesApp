@@ -12,19 +12,19 @@ enum MainPageSegments {
     case popular([TVSeries]), topRated([TVSeries])
     
     static var allCases = ["Popular", "Top Rated"]
-    static var defaultSegment = MainPageSegments.popular([])
+    static var selectedSegment = 0
 }
 
 //MARK: - Interactor
 protocol MainPageInteractorProtocol: AnyObject {
     var delegate: MainPageInteractorDelegate? { get set }
-    func load(page: Int, segment: MainPageSegments)
+    func load(page: Int)
 }
 
 enum MainPageInteractorOutput {
     case setLoading(Bool)
     case setError(Error)
-    case showList(MainPageSegments)
+    case showList([TVSeries])
 }
 
 protocol MainPageInteractorDelegate: AnyObject {
@@ -38,7 +38,8 @@ protocol MainPagePresenterProtocol: AnyObject {
 
 enum MainPagePresenterOutput {
     case setLoading(Bool)
-    case showList(MainPageSegments)
+    case setError(Error)
+    case showList([TVSeries])
 }
 
 //MARK: - View

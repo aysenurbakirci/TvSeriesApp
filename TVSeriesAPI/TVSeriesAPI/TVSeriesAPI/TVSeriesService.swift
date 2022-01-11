@@ -7,6 +7,11 @@
 
 import Foundation
 
+public protocol TVSeriesServiceProtocol {
+    func getPopularTVSeries(page: Int, completion: @escaping (Result<APIModel, Error>) -> ())
+    func getTopRatedTVSeries(page: Int, completion: @escaping (Result<APIModel, Error>) -> ())
+}
+
 final public class TVSeriesService {
     
     private func buildRequest(api: API) throws -> URLRequest {

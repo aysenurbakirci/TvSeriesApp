@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TVSeriesAPI
 
 final class MainPageViewController: UIViewController, MainPageViewProtocol {
 
@@ -16,12 +17,16 @@ final class MainPageViewController: UIViewController, MainPageViewProtocol {
         view.tableView.dataSource = self
         return view
     }()
+    
+    private var tvSeries: [TVSeries] = []
+    var presenter: MainPagePresenterProtocol!
 
     //MARK: - Initalization
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = mainView.segmentControl
         view = mainView
+        presenter.load(page: 1)
     }
 }
 
@@ -29,7 +34,7 @@ final class MainPageViewController: UIViewController, MainPageViewProtocol {
 extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return tvSeries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -44,6 +49,14 @@ extension MainPageViewController {
     
     //MARK: - Presenter Output
     func handleOutput(_ output: MainPagePresenterOutput) {
-        
+        switch output {
+        case .setLoading(let bool):
+            print("Loading state is: \(bool)")
+        case .setError(let error):
+            print("Error is: \(error.localizedDescription)")
+        case .showList(let tvSeries):
+            self.tvSeries = tvSeries
+            self.mainView.tableView.reloadData()
+        }
     }
 }
