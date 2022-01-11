@@ -6,22 +6,17 @@
 //
 
 import UIKit
-import struct TVSeriesAPI.TVSeries
+import TVSeriesAPI
 
 struct ListCellViewModel {
     
-    let image: UIImage
+    var image: UIImage?
     let title: String
     let overview: String
 
     init(tvSeries: TVSeries) {
-        self.image = tvSeries.posterPath
-        guard let image =
+        self.image = UIImage(named: "tree")
         self.title = tvSeries.name
-        self.overview = tvSeries.overview
-    }
-    
-    private func fetchImage(_ path: String) {
-        
+        self.overview = "Vote: " + "\(tvSeries.voteAverage)"
     }
 }

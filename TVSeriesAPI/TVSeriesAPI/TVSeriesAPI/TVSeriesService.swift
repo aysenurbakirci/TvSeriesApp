@@ -14,6 +14,8 @@ public protocol TVSeriesServiceProtocol {
 
 final public class TVSeriesService {
     
+    public init() {}
+    
     private func buildRequest(api: API) throws -> URLRequest {
         var urlComponents = URLComponents()
         var queryItems: [URLQueryItem] = []

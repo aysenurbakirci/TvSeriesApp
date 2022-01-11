@@ -6,12 +6,19 @@
 //
 
 import UIKit
+import TVSeriesAPI
 
 final class MainPageBuilder {
     
     static func build() -> UIViewController {
-        let vc = MainPageViewController()
-        let nc = UINavigationController(rootViewController: vc)
-        return nc
+        let view = MainPageViewController()
+        let router = MainPageRouter()
+        let interactor = MainPageInteractor(service: TVSeriesService())
+        let presenter = MainPagePresenter(view: view,
+                                          interactor: interactor,
+                                          router: router)
+        view.presenter = presenter
+        let navigation = UINavigationController(rootViewController: view)
+        return navigation
     }
 }

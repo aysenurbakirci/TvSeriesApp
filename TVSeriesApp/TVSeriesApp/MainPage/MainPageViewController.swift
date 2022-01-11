@@ -15,6 +15,7 @@ final class MainPageViewController: UIViewController, MainPageViewProtocol {
         let view = MainPageView()
         view.tableView.delegate = self
         view.tableView.dataSource = self
+        view.segmentControl.addTarget(self, action: #selector(segmentedValueChanged), for: .valueChanged)
         return view
     }()
     
@@ -41,6 +42,10 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableCell.reuseIdentifier, for: indexPath) as? ListTableCell else {
             return UITableViewCell()
         }
+        
+        let model = ListCellViewModel(tvSeries: tvSeries[indexPath.row])
+        cell.applyModel(model)
+        
         return cell
     }
 }
@@ -56,7 +61,14 @@ extension MainPageViewController {
             print("Error is: \(error.localizedDescription)")
         case .showList(let tvSeries):
             self.tvSeries = tvSeries
-            self.mainView.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.mainView.tableView.reloadData()
+            }
         }
+    }
+    
+    @objc func segmentedValueChanged(_ sender:UISegmentedControl!)
+    {
+        print("Selected Segment Index is : \(sender.selectedSegmentIndex)")
     }
 }

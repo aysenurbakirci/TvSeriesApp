@@ -26,6 +26,7 @@ final class ListCellView: UIView {
         let overview = UILabel()
         overview.font = .systemFont(ofSize: 12)
         overview.textColor = .darkGray
+        overview.numberOfLines = 0
         return overview
     }()
     
