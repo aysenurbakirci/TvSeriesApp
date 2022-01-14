@@ -7,20 +7,38 @@
 
 import TVSeriesAPI
 
-enum MainPageSegments {
-    //Use CaseIterable
+enum MainPageSegments: CaseIterable {
+    static var allCases: [MainPageSegments] {
+        return [.popular([]), .topRated([])]
+    }
     case popular([TVSeries]), topRated([TVSeries])
     
-    static var allCases = ["Popular", "Top Rated"]
-    static var selectedSegment = 0
+    var caseTitle: String {
+        switch self {
+        case .popular(_):
+            return "Popular"
+        case .topRated(_):
+            return "Top Rated"
+        }
+    }
+    
+    static func segmentControlItems() -> [String] {
+        var items: [String] = []
+        MainPageSegments.allCases.forEach { segment in
+            items.append(segment.caseTitle)
+        }
+        return items
+    }
 }
 
 //MARK: - Interactor
 protocol MainPageInteractorProtocol: AnyObject {
     var delegate: MainPageInteractorDelegate? { get set }
-    func loadPopular(to page: Int)
-    func loadTopRated(to page: Int)
+    func loadPopular()
+    func loadTopRated()
     func selectTVSeries(to index: Int)
+    func startPagination(segment: MainPageSegments)
+    func terminatePagination()
 }
 
 enum MainPageInteractorOutput {
@@ -36,14 +54,15 @@ protocol MainPageInteractorDelegate: AnyObject {
 
 //MARK: - Presenter
 protocol MainPagePresenterProtocol: AnyObject {
-    func loadPopular(to page: Int)
-    func loadTopRated(to page: Int)
+    func loadPopular()
+    func loadTopRated()
     func selectTVSeries(to index: Int)
+    func startPagination(segment: MainPageSegments)
+    func terminatePagination()
 }
 
 enum MainPagePresenterOutput {
-    case setLoading(Bool)
-    case setError(Error)
+    case showLoading(Bool)
     case showList([TVSeries])
 }
 

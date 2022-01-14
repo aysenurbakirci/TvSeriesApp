@@ -29,7 +29,7 @@ final class MainPageViewController: UIViewController, MainPageViewProtocol {
         self.navigationItem.titleView = mainView.segmentControl
         view = mainView
         
-        loadPageWithSegmentIndex(page: 1, index: mainView.segmentControl.selectedSegmentIndex)
+        loadPageWithSegmentIndex(index: mainView.segmentControl.selectedSegmentIndex)
     }
 }
 
@@ -55,6 +55,12 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         presenter.selectTVSeries(to: indexPath.row)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == (tvSeries.count - 2) {
+            
+        }
+    }
 }
 
 extension MainPageViewController {
@@ -62,10 +68,8 @@ extension MainPageViewController {
     //MARK: - Presenter Output
     func handleOutput(_ output: MainPagePresenterOutput) {
         switch output {
-        case .setLoading(let bool):
+        case .showLoading(let bool):
             print("Loading state is: \(bool)")
-        case .setError(let error):
-            print("Error is: \(error.localizedDescription)")
         case .showList(let tvSeries):
             self.tvSeries = tvSeries
             DispatchQueue.main.async {
@@ -75,15 +79,15 @@ extension MainPageViewController {
     }
     
     @objc func segmentedValueChanged(_ sender:UISegmentedControl!) {
-        loadPageWithSegmentIndex(page: 1, index: sender.selectedSegmentIndex)
+        loadPageWithSegmentIndex(index: sender.selectedSegmentIndex)
     }
     
-    private func loadPageWithSegmentIndex(page: Int, index: Int) {
+    private func loadPageWithSegmentIndex(index: Int) {
         switch index {
         case 0:
-            presenter.loadPopular(to: page)
+            presenter.loadPopular()
         case 1:
-            presenter.loadTopRated(to: page)
+            presenter.loadTopRated()
         default:
             break
         }

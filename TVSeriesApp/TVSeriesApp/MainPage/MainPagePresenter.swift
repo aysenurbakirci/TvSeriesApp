@@ -29,17 +29,25 @@ final class MainPagePresenter: MainPagePresenterProtocol {
         self.interactor.delegate = self
     }
 
-    //MARK: - Load
-    func loadPopular(to page: Int) {
-        interactor.loadPopular(to: page)
+    //MARK: - Interactor Methods
+    func loadPopular() {
+        interactor.loadPopular()
     }
     
-    func loadTopRated(to page: Int) {
-        interactor.loadTopRated(to: page)
+    func loadTopRated() {
+        interactor.loadTopRated()
     }
     
     func selectTVSeries(to index: Int) {
         interactor.selectTVSeries(to: index)
+    }
+    
+    func startPagination(segment: MainPageSegments) {
+        
+    }
+    
+    func terminatePagination() {
+        
     }
 }
 
@@ -49,10 +57,9 @@ extension MainPagePresenter: MainPageInteractorDelegate {
     func handleOutput(_ output: MainPageInteractorOutput) {
         switch output {
         case .setLoading(let bool):
-            view.handleOutput(.setLoading(bool))
+            view.handleOutput(.showLoading(bool))
         case .setError(let error):
             router.navigate(to: .showError(error))
-//            view.handleOutput(.setError(error))
         case .showList(let tvSeries):
             view.handleOutput(.showList(tvSeries))
         case .showDescription(title: let title, message: let message):

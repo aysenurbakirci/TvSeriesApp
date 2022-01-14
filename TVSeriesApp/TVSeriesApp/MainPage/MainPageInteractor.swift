@@ -16,17 +16,21 @@ final class MainPageInteractor: MainPageInteractorProtocol {
     
     private let service: TVSeriesServiceProtocol
     private var tvSeries: [TVSeries] = []
+    private var currentPage = 1
+    
+    var isPagination: Bool
     
     //MARK: - Initalization
     init(service: TVSeriesServiceProtocol) {
         self.service = service
+        isPagination = false
     }
     
     //MARK: - Load
-    func loadPopular(to page: Int) {
+    func loadPopular() {
         delegate?.handleOutput(.setLoading(true))
         
-        service.getPopularTVSeries(page: page) { [weak self] result in
+        service.getPopularTVSeries(page: currentPage) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -41,10 +45,10 @@ final class MainPageInteractor: MainPageInteractorProtocol {
         }
     }
     
-    func loadTopRated(to page: Int) {
+    func loadTopRated() {
         delegate?.handleOutput(.setLoading(true))
         
-        service.getTopRatedTVSeries(page: page) { [weak self] result in
+        service.getTopRatedTVSeries(page: currentPage) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -63,5 +67,13 @@ final class MainPageInteractor: MainPageInteractorProtocol {
         let selected = tvSeries[index]
         delegate?.handleOutput(.showDescription(title: selected.name,
                                                 message: selected.overview))
+    }
+    
+    func startPagination(segment: MainPageSegments) {
+        
+    }
+    
+    func terminatePagination() {
+        
     }
 }

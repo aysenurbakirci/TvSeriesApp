@@ -22,8 +22,8 @@ final class MainPageView: UIView {
     }()
     
     let segmentControl: UISegmentedControl = {
-        let segmentControl = UISegmentedControl(items: MainPageSegments.allCases)
-        segmentControl.selectedSegmentIndex = MainPageSegments.selectedSegment
+        let segmentControl = UISegmentedControl(items: MainPageSegments.segmentControlItems())
+        segmentControl.selectedSegmentIndex = 0
         return segmentControl
     }()
     
