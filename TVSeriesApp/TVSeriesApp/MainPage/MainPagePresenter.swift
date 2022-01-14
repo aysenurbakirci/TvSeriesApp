@@ -13,10 +13,12 @@ import Foundation
 
 final class MainPagePresenter: MainPagePresenterProtocol {
     
+    //MARK: - Properties
     private unowned let view: MainPageViewProtocol
     private let interactor: MainPageInteractorProtocol
     private let router: MainPageRouterProtocol
     
+    //MARK: - Initalization
     init(view: MainPageViewProtocol,
          interactor: MainPageInteractorProtocol,
          router: MainPageRouterProtocol) {
@@ -28,8 +30,12 @@ final class MainPagePresenter: MainPagePresenterProtocol {
     }
 
     //MARK: - Load
-    func load(page: Int) {
-        interactor.load(page: page)
+    func loadPopular(page: Int) {
+        interactor.loadPopular(page: page)
+    }
+    
+    func loadTopRated(page: Int) {
+        interactor.loadTopRated(page: page)
     }
 }
 
@@ -42,8 +48,8 @@ extension MainPagePresenter: MainPageInteractorDelegate {
             view.handleOutput(.setLoading(bool))
         case .setError(let error):
             view.handleOutput(.setError(error))
-        case .showList(let mainPageSegments):
-            view.handleOutput(.showList(mainPageSegments))
+        case .showList(let tvSeries):
+            view.handleOutput(.showList(tvSeries))
         }
     }
 }

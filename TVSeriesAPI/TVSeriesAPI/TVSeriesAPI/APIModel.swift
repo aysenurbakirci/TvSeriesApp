@@ -26,12 +26,10 @@ public struct TVSeries: Codable {
     public let overview: String
     public let posterPath: String
     public let voteAverage: Double
-    public let firstAirDate: String
 
     enum CodingKeys: String, CodingKey {
         case id, name, overview
         case posterPath = "poster_path"
         case voteAverage = "vote_average"
-        case firstAirDate = "first_air_date"
     }
 }

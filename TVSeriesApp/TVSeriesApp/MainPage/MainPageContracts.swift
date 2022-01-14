@@ -18,7 +18,8 @@ enum MainPageSegments {
 //MARK: - Interactor
 protocol MainPageInteractorProtocol: AnyObject {
     var delegate: MainPageInteractorDelegate? { get set }
-    func load(page: Int)
+    func loadPopular(page: Int)
+    func loadTopRated(page: Int)
 }
 
 enum MainPageInteractorOutput {
@@ -33,7 +34,8 @@ protocol MainPageInteractorDelegate: AnyObject {
 
 //MARK: - Presenter
 protocol MainPagePresenterProtocol: AnyObject {
-    func load(page: Int)
+    func loadPopular(page: Int)
+    func loadTopRated(page: Int)
 }
 
 enum MainPagePresenterOutput {

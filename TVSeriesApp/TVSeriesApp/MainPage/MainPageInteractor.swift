@@ -22,7 +22,24 @@ final class MainPageInteractor: MainPageInteractorProtocol {
     }
     
     //MARK: - Load
-    func load(page: Int) {
+    func loadPopular(page: Int) {
+        delegate?.handleOutput(.setLoading(true))
+        
+        service.getPopularTVSeries(page: page) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case let .failure(error):
+                self.delegate?.handleOutput(.setLoading(false))
+                self.delegate?.handleOutput(.setError(error))
+            case let .success(model):
+                self.delegate?.handleOutput(.setLoading(false))
+                self.delegate?.handleOutput(.showList(model.results))
+            }
+        }
+    }
+    
+    func loadTopRated(page: Int) {
         delegate?.handleOutput(.setLoading(true))
         
         service.getTopRatedTVSeries(page: page) { [weak self] result in

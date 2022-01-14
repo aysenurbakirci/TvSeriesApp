@@ -25,9 +25,11 @@ final class MainPageViewController: UIViewController, MainPageViewProtocol {
     //MARK: - Initalization
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationItem.titleView = mainView.segmentControl
         view = mainView
-        presenter.load(page: 1)
+        
+        loadPageWithSegmentIndex(page: 1, index: mainView.segmentControl.selectedSegmentIndex)
     }
 }
 
@@ -67,8 +69,18 @@ extension MainPageViewController {
         }
     }
     
-    @objc func segmentedValueChanged(_ sender:UISegmentedControl!)
-    {
-        print("Selected Segment Index is : \(sender.selectedSegmentIndex)")
+    @objc func segmentedValueChanged(_ sender:UISegmentedControl!) {
+        loadPageWithSegmentIndex(page: 1, index: sender.selectedSegmentIndex)
+    }
+    
+    private func loadPageWithSegmentIndex(page: Int, index: Int) {
+        switch index {
+        case 0:
+            presenter.loadPopular(page: page)
+        case 1:
+            presenter.loadTopRated(page: page)
+        default:
+            break
+        }
     }
 }
