@@ -50,6 +50,11 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter.selectTVSeries(to: indexPath.row)
+    }
 }
 
 extension MainPageViewController {
@@ -76,9 +81,9 @@ extension MainPageViewController {
     private func loadPageWithSegmentIndex(page: Int, index: Int) {
         switch index {
         case 0:
-            presenter.loadPopular(page: page)
+            presenter.loadPopular(to: page)
         case 1:
-            presenter.loadTopRated(page: page)
+            presenter.loadTopRated(to: page)
         default:
             break
         }

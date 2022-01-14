@@ -15,6 +15,7 @@ final class MainPageInteractor: MainPageInteractorProtocol {
     weak var delegate: MainPageInteractorDelegate?
     
     private let service: TVSeriesServiceProtocol
+    private var tvSeries: [TVSeries] = []
     
     //MARK: - Initalization
     init(service: TVSeriesServiceProtocol) {
@@ -22,7 +23,7 @@ final class MainPageInteractor: MainPageInteractorProtocol {
     }
     
     //MARK: - Load
-    func loadPopular(page: Int) {
+    func loadPopular(to page: Int) {
         delegate?.handleOutput(.setLoading(true))
         
         service.getPopularTVSeries(page: page) { [weak self] result in
@@ -34,12 +35,13 @@ final class MainPageInteractor: MainPageInteractorProtocol {
                 self.delegate?.handleOutput(.setError(error))
             case let .success(model):
                 self.delegate?.handleOutput(.setLoading(false))
-                self.delegate?.handleOutput(.showList(model.results))
+                self.tvSeries = model.results
+                self.delegate?.handleOutput(.showList(self.tvSeries))
             }
         }
     }
     
-    func loadTopRated(page: Int) {
+    func loadTopRated(to page: Int) {
         delegate?.handleOutput(.setLoading(true))
         
         service.getTopRatedTVSeries(page: page) { [weak self] result in
@@ -51,8 +53,15 @@ final class MainPageInteractor: MainPageInteractorProtocol {
                 self.delegate?.handleOutput(.setError(error))
             case let .success(model):
                 self.delegate?.handleOutput(.setLoading(false))
-                self.delegate?.handleOutput(.showList(model.results))
+                self.tvSeries = model.results
+                self.delegate?.handleOutput(.showList(self.tvSeries))
             }
         }
+    }
+    
+    func selectTVSeries(to index: Int) {
+        let selected = tvSeries[index]
+        delegate?.handleOutput(.showDescription(title: selected.name,
+                                                message: selected.overview))
     }
 }

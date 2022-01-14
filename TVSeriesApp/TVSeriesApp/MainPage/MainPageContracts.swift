@@ -18,14 +18,16 @@ enum MainPageSegments {
 //MARK: - Interactor
 protocol MainPageInteractorProtocol: AnyObject {
     var delegate: MainPageInteractorDelegate? { get set }
-    func loadPopular(page: Int)
-    func loadTopRated(page: Int)
+    func loadPopular(to page: Int)
+    func loadTopRated(to page: Int)
+    func selectTVSeries(to index: Int)
 }
 
 enum MainPageInteractorOutput {
     case setLoading(Bool)
     case setError(Error)
     case showList([TVSeries])
+    case showDescription(title: String, message: String)
 }
 
 protocol MainPageInteractorDelegate: AnyObject {
@@ -34,8 +36,9 @@ protocol MainPageInteractorDelegate: AnyObject {
 
 //MARK: - Presenter
 protocol MainPagePresenterProtocol: AnyObject {
-    func loadPopular(page: Int)
-    func loadTopRated(page: Int)
+    func loadPopular(to page: Int)
+    func loadTopRated(to page: Int)
+    func selectTVSeries(to index: Int)
 }
 
 enum MainPagePresenterOutput {
@@ -52,6 +55,7 @@ protocol MainPageViewProtocol: AnyObject {
 //MARK: - Router
 enum MainPageRoute {
     case showError(_ error: Error)
+    case showDescription(title: String, message: String)
 }
 
 protocol MainPageRouterProtocol: AnyObject {

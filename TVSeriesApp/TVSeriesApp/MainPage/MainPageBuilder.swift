@@ -12,7 +12,7 @@ final class MainPageBuilder {
     
     static func build() -> UIViewController {
         let view = MainPageViewController()
-        let router = MainPageRouter()
+        let router = MainPageRouter(viewController: view)
         let interactor = MainPageInteractor(service: TVSeriesService())
         let presenter = MainPagePresenter(view: view,
                                           interactor: interactor,

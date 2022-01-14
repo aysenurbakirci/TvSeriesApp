@@ -10,11 +10,32 @@
  Contacts the Presenter in order to route requests. **/
 
 import Foundation
+import UIKit
 
 final class MainPageRouter: MainPageRouterProtocol {
     
+    unowned let viewController: UIViewController
+    
+    init(viewController: UIViewController) {
+        self.viewController = viewController
+    }
+    
     //MARK: - Navigation
     func navigate(to route: MainPageRoute) {
+        switch route {
+        case .showError(let error):
+            makeAlert(title: "Error!", message: error.localizedDescription)
+        case .showDescription(let title, let message):
+            makeAlert(title: title, message: message)
+        }
+    }
+    
+    private func makeAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         
+        alertController.addAction(okAction)
+        
+        viewController.present(alertController, animated: true, completion: nil)
     }
 }
