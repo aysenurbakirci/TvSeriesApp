@@ -43,11 +43,11 @@ final class MainPagePresenter: MainPagePresenterProtocol {
     }
     
     func startPagination(segment: MainPageSegments) {
-        
+        interactor.startPagination(segment: segment)
     }
     
-    func terminatePagination() {
-        
+    func resetPagination() {
+        interactor.resetPagination()
     }
 }
 

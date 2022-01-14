@@ -18,12 +18,9 @@ final class MainPageInteractor: MainPageInteractorProtocol {
     private var tvSeries: [TVSeries] = []
     private var currentPage = 1
     
-    var isPagination: Bool
-    
     //MARK: - Initalization
     init(service: TVSeriesServiceProtocol) {
         self.service = service
-        isPagination = false
     }
     
     //MARK: - Load
@@ -70,10 +67,18 @@ final class MainPageInteractor: MainPageInteractorProtocol {
     }
     
     func startPagination(segment: MainPageSegments) {
-        
+        switch segment {
+        case .popular(_):
+            currentPage += 1
+            loadPopular()
+        case .topRated(_):
+            currentPage += 1
+            loadTopRated()
+        }
     }
     
-    func terminatePagination() {
-        
+    func resetPagination() {
+        currentPage = 1
+        tvSeries = []
     }
 }

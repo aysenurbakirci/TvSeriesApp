@@ -6,6 +6,7 @@
 //
 
 import TVSeriesAPI
+import UIKit
 
 enum MainPageSegments: CaseIterable {
     static var allCases: [MainPageSegments] {
@@ -38,7 +39,7 @@ protocol MainPageInteractorProtocol: AnyObject {
     func loadTopRated()
     func selectTVSeries(to index: Int)
     func startPagination(segment: MainPageSegments)
-    func terminatePagination()
+    func resetPagination()
 }
 
 enum MainPageInteractorOutput {
@@ -58,7 +59,7 @@ protocol MainPagePresenterProtocol: AnyObject {
     func loadTopRated()
     func selectTVSeries(to index: Int)
     func startPagination(segment: MainPageSegments)
-    func terminatePagination()
+    func resetPagination()
 }
 
 enum MainPagePresenterOutput {

@@ -21,6 +21,7 @@ final class MainPageViewController: UIViewController, MainPageViewProtocol {
     
     private var tvSeries: [TVSeries] = []
     var presenter: MainPagePresenterProtocol!
+    private var loadStatement: Bool = false
 
     //MARK: - Initalization
     override func viewDidLoad() {
@@ -58,7 +59,12 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == (tvSeries.count - 2) {
+            let selectedIndex = mainView.segmentControl.selectedSegmentIndex
+            let selectedSegment = MainPageSegments.allCases[selectedIndex]
             
+            if !loadStatement {
+                presenter.startPagination(segment: selectedSegment)
+            }
         }
     }
 }
@@ -70,6 +76,7 @@ extension MainPageViewController {
         switch output {
         case .showLoading(let bool):
             print("Loading state is: \(bool)")
+            loadStatement = bool
         case .showList(let tvSeries):
             self.tvSeries = tvSeries
             DispatchQueue.main.async {
@@ -79,17 +86,18 @@ extension MainPageViewController {
     }
     
     @objc func segmentedValueChanged(_ sender:UISegmentedControl!) {
+        presenter.resetPagination()
         loadPageWithSegmentIndex(index: sender.selectedSegmentIndex)
     }
     
     private func loadPageWithSegmentIndex(index: Int) {
-        switch index {
-        case 0:
+        let segment = MainPageSegments.allCases[index]
+        
+        switch segment {
+        case .popular(_):
             presenter.loadPopular()
-        case 1:
+        case .topRated(_):
             presenter.loadTopRated()
-        default:
-            break
         }
     }
 }
