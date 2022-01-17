@@ -13,7 +13,7 @@ protocol MainPageInteractorProtocol: AnyObject {
     func loadPopular()
     func loadTopRated()
     func selectTVSeries(to index: Int)
-    func startPagination()
+    func startPagination(segment: MainPageSegments)
     func resetPagination()
 }
 
@@ -21,6 +21,8 @@ enum MainPageInteractorOutput {
     case setLoading(Bool)
     case setError(Error)
     case showList([TVSeries])
+    case fetchRows([IndexPath])
+    case totalResult(Int)
     case showDescription(title: String, message: String)
 }
 
@@ -33,17 +35,19 @@ protocol MainPagePresenterProtocol: AnyObject {
     func loadPopular()
     func loadTopRated()
     func selectTVSeries(to index: Int)
-    func startPagination()
+    func startPagination(segment: MainPageSegments)
     func resetPagination()
 }
 
 enum MainPagePresenterOutput {
     case showLoading(Bool)
     case showList([TVSeries])
+    case reloadTableView(Int)
 }
 
 //MARK: - View
 protocol MainPageViewProtocol: AnyObject {
+    func fetchRows(indexPaths: [IndexPath])
     func handleOutput(_ output: MainPagePresenterOutput)
 }
 

@@ -31,6 +31,9 @@ final class MainPageRouter: MainPageRouterProtocol {
             makeAlert(title: title, message: message)
         }
     }
+}
+
+extension MainPageRouter {
     
     private func makeAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

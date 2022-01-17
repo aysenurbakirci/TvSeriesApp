@@ -42,8 +42,8 @@ final class MainPagePresenter: MainPagePresenterProtocol {
         interactor.selectTVSeries(to: index)
     }
     
-    func startPagination() {
-        interactor.startPagination()
+    func startPagination(segment: MainPageSegments) {
+        interactor.startPagination(segment: segment)
     }
     
     func resetPagination() {
@@ -64,6 +64,10 @@ extension MainPagePresenter: MainPageInteractorDelegate {
             view.handleOutput(.showList(tvSeries))
         case .showDescription(title: let title, message: let message):
             router.navigate(to: .showDescription(title: title, message: message))
+        case .fetchRows(let indexPaths):
+            view.fetchRows(indexPaths: indexPaths)
+        case .totalResult(let total):
+            view.handleOutput(.reloadTableView(total))
         }
     }
 }
