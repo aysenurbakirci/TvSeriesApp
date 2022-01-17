@@ -12,10 +12,12 @@ public struct APIModel: Codable {
     public let page: Int
     public let results: [TVSeries]
     public let totalPages: Int
+    public let totalResults: Int
 
     enum CodingKeys: String, CodingKey {
         case page, results
         case totalPages = "total_pages"
+        case totalResults = "total_results"
     }
 }
 
