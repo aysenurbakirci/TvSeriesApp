@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2441FB3A27954C580033E3A5 /* MainPageSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2441FB3927954C580033E3A5 /* MainPageSegments.swift */; };
 		3724A02E27845DC3003E8C31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A02D27845DC3003E8C31 /* AppDelegate.swift */; };
 		3724A03027845DC3003E8C31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A02F27845DC3003E8C31 /* SceneDelegate.swift */; };
 		3724A03227845DC3003E8C31 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A03127845DC3003E8C31 /* MainPageViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2441FB3927954C580033E3A5 /* MainPageSegments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageSegments.swift; sourceTree = "<group>"; };
 		3724A02A27845DC3003E8C31 /* TVSeriesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVSeriesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3724A02D27845DC3003E8C31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3724A02F27845DC3003E8C31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				3724A06727847DFA003E8C31 /* MainPageInteractor.swift */,
 				3724A06D27847E16003E8C31 /* MainPageRouter.swift */,
 				3724A06F27847E53003E8C31 /* MainPageContracts.swift */,
+				2441FB3927954C580033E3A5 /* MainPageSegments.swift */,
 				3724A07127847E5B003E8C31 /* MainPageBuilder.swift */,
 			);
 			path = MainPage;
@@ -225,6 +228,7 @@
 				3724A06E27847E16003E8C31 /* MainPageRouter.swift in Sources */,
 				3724A07027847E53003E8C31 /* MainPageContracts.swift in Sources */,
 				3724A07227847E5B003E8C31 /* MainPageBuilder.swift in Sources */,
+				2441FB3A27954C580033E3A5 /* MainPageSegments.swift in Sources */,
 				3724A06A27847E03003E8C31 /* MainPagePresenter.swift in Sources */,
 				3724A075278480C5003E8C31 /* ListCellView.swift in Sources */,
 				3724A06627847DD5003E8C31 /* MainPageView.swift in Sources */,

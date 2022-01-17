@@ -14,8 +14,10 @@ import UIKit
 
 final class MainPageRouter: MainPageRouterProtocol {
     
+    //MARK: - Properties
     unowned let viewController: UIViewController
     
+    //MARK: - Initalization
     init(viewController: UIViewController) {
         self.viewController = viewController
     }
