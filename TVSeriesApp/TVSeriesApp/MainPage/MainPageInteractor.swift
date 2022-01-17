@@ -36,7 +36,7 @@ final class MainPageInteractor: MainPageInteractorProtocol {
                 self.delegate?.handleOutput(.setError(error))
             case let .success(model):
                 self.delegate?.handleOutput(.setLoading(false))
-                self.tvSeries = model.results
+                self.tvSeries += model.results
                 self.delegate?.handleOutput(.showList(self.tvSeries))
             }
         }
@@ -54,7 +54,7 @@ final class MainPageInteractor: MainPageInteractorProtocol {
                 self.delegate?.handleOutput(.setError(error))
             case let .success(model):
                 self.delegate?.handleOutput(.setLoading(false))
-                self.tvSeries = model.results
+                self.tvSeries += model.results
                 self.delegate?.handleOutput(.showList(self.tvSeries))
             }
         }
