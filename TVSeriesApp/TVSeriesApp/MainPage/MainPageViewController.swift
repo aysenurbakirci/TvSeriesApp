@@ -59,11 +59,8 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == (tvSeries.count - 2) {
-            let selectedIndex = mainView.segmentControl.selectedSegmentIndex
-            let selectedSegment = MainPageSegments.allCases[selectedIndex]
-            
             if !loadStatement {
-                presenter.startPagination(segment: selectedSegment)
+                presenter.startPagination()
             }
         }
     }

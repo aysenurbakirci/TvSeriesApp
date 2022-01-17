@@ -17,6 +17,7 @@ final class MainPageInteractor: MainPageInteractorProtocol {
     private let service: TVSeriesServiceProtocol
     private var tvSeries: [TVSeries] = []
     private var currentPage = 1
+    private var totalPage = 1
     
     //MARK: - Initalization
     init(service: TVSeriesServiceProtocol) {
@@ -37,6 +38,7 @@ final class MainPageInteractor: MainPageInteractorProtocol {
             case let .success(model):
                 self.delegate?.handleOutput(.setLoading(false))
                 self.tvSeries += model.results
+                self.totalPage = model.totalPages
                 self.delegate?.handleOutput(.showList(self.tvSeries))
             }
         }
@@ -55,6 +57,7 @@ final class MainPageInteractor: MainPageInteractorProtocol {
             case let .success(model):
                 self.delegate?.handleOutput(.setLoading(false))
                 self.tvSeries += model.results
+                self.totalPage = model.totalPages
                 self.delegate?.handleOutput(.showList(self.tvSeries))
             }
         }
@@ -66,14 +69,10 @@ final class MainPageInteractor: MainPageInteractorProtocol {
                                                 message: selected.overview))
     }
     
-    func startPagination(segment: MainPageSegments) {
-        switch segment {
-        case .popular(_):
+    func startPagination() {
+        if totalPage >= currentPage {
             currentPage += 1
             loadPopular()
-        case .topRated(_):
-            currentPage += 1
-            loadTopRated()
         }
     }
     

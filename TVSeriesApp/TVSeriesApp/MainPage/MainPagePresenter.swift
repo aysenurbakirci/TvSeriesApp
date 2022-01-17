@@ -42,8 +42,8 @@ final class MainPagePresenter: MainPagePresenterProtocol {
         interactor.selectTVSeries(to: index)
     }
     
-    func startPagination(segment: MainPageSegments) {
-        interactor.startPagination(segment: segment)
+    func startPagination() {
+        interactor.startPagination()
     }
     
     func resetPagination() {

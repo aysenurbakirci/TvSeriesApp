@@ -13,7 +13,7 @@ protocol MainPageInteractorProtocol: AnyObject {
     func loadPopular()
     func loadTopRated()
     func selectTVSeries(to index: Int)
-    func startPagination(segment: MainPageSegments)
+    func startPagination()
     func resetPagination()
 }
 
@@ -33,7 +33,7 @@ protocol MainPagePresenterProtocol: AnyObject {
     func loadPopular()
     func loadTopRated()
     func selectTVSeries(to index: Int)
-    func startPagination(segment: MainPageSegments)
+    func startPagination()
     func resetPagination()
 }
 
