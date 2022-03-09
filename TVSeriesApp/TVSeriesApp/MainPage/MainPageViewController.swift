@@ -48,11 +48,12 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableCell.reuseIdentifier, for: indexPath) as? ListTableCell else {
             return UITableViewCell()
         }
-        
+
         if isLoadingCell(for: indexPath) {
             cell.applyModel(.none)
         } else {
-            let model = ListCellViewModel(tvSeries: tvSeries[indexPath.row])
+            let tvSeries = self.tvSeries[indexPath.row]
+            let model = ListCellViewModel(tvSeries: tvSeries)
             cell.applyModel(model)
         }
         
@@ -71,8 +72,8 @@ extension MainPageViewController: UITableViewDataSourcePrefetching {
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         if indexPaths.contains(where: isLoadingCell) {
-            let selectedIndex = mainView.segmentControl.selectedSegmentIndex
-            let selectedSegment = MainPageSegments.allCases[selectedIndex]
+            let segmentIndex = mainView.segmentControl.selectedSegmentIndex
+            let selectedSegment = MainPageSegments.allCases[segmentIndex]
             presenter.startPagination(segment: selectedSegment)
         }
     }
@@ -93,9 +94,6 @@ extension MainPageViewController: MainPageViewProtocol {
             }
         case .reloadTableView(let total):
             self.totalResults = total
-            DispatchQueue.main.async { [weak self] in
-                self?.mainView.tableView.reloadData()
-            }
         }
     }
     
@@ -109,16 +107,6 @@ extension MainPageViewController: MainPageViewProtocol {
 }
 
 private extension MainPageViewController {
-    
-    func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= tvSeries.count
-    }
-    
-    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-        let indexPathsForVisibleRows = mainView.tableView.indexPathsForVisibleRows ?? []
-        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-        return Array(indexPathsIntersection)
-    }
     
     func loadPageWithSegmentIndex(index: Int) {
         let segment = MainPageSegments.allCases[index]
@@ -134,5 +122,15 @@ private extension MainPageViewController {
     @objc func segmentedValueChanged(_ sender:UISegmentedControl!) {
         presenter.resetPagination()
         loadPageWithSegmentIndex(index: sender.selectedSegmentIndex)
+    }
+    
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= tvSeries.count
+    }
+    
+    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+        let indexPathsForVisibleRows = mainView.tableView.indexPathsForVisibleRows ?? []
+        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+        return Array(indexPathsIntersection)
     }
 }
