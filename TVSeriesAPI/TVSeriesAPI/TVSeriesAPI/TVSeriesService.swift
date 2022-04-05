@@ -8,8 +8,8 @@
 import Foundation
 
 public protocol TVSeriesServiceProtocol {
-    func getPopularTVSeries(page: Int, completion: @escaping (Result<APIModel, Error>) -> ())
-    func getTopRatedTVSeries(page: Int, completion: @escaping (Result<APIModel, Error>) -> ())
+    func getPopularTVSeries(page: Int, completion: @escaping (Result<[ImageRecord], Error>) -> ())
+    func getTopRatedTVSeries(page: Int, completion: @escaping (Result<[ImageRecord], Error>) -> ())
 }
 
 final public class TVSeriesService {
@@ -44,9 +44,9 @@ final public class TVSeriesService {
         }
     }
     
-    private func load<T: Decodable>(_ tType: T.Type,
-                                    api: API,
-                                    completion: @escaping (Result<T, Error>) -> ()) {
+    private func load(api: API, completion: @escaping (Result<[ImageRecord], Error>) -> ()) {
+        
+        var recordList: [ImageRecord] = []
         
         guard let request = try? buildRequest(api: api) else {
             completion(.failure(ServiceError.requestFailed))
@@ -61,11 +61,15 @@ final public class TVSeriesService {
             
             if let data = data, let response = response as? HTTPURLResponse {
                 if (200...299).contains(response.statusCode) {
-                    guard let model = try? JSONDecoder().decode(T.self, from: data) else {
+                    guard let dataModel = try? JSONDecoder().decode(APIModel.self, from: data) else {
                         completion(.failure(ServiceError.decodeError))
                         return
                     }
-                    completion(.success(model))
+                    for data in dataModel.results {
+                        let imageRecord = ImageRecord(model: data, path: data.posterPath)
+                        recordList.append(imageRecord)
+                        completion(.success(recordList))
+                    }
                 } else {
                     completion(.failure(ServiceError.decideError(response.statusCode)))
                 }
@@ -77,15 +81,22 @@ final public class TVSeriesService {
 
 extension TVSeriesService: TVSeriesServiceProtocol {
     
-    public func getPopularTVSeries(page: Int, completion: @escaping (Result<APIModel, Error>) -> ()) {
-        load(APIModel.self, api: TVSeriesAPI.popular(page: page)) { result in
+    public func getPopularTVSeries(page: Int, completion: @escaping (Result<[ImageRecord], Error>) -> ()) {
+        load(api: TVSeriesAPI.popular(page: page)) { result in
             completion(result)
         }
     }
     
-    public func getTopRatedTVSeries(page: Int, completion: @escaping (Result<APIModel, Error>) -> ()) {
-        load(APIModel.self, api: TVSeriesAPI.topRated(page: page)) { result in
+    public func getTopRatedTVSeries(page: Int, completion: @escaping (Result<[ImageRecord], Error>) -> ()) {
+        load(api: TVSeriesAPI.topRated(page: page)) { result in
             completion(result)
         }
+    }
+    
+    public func getImageData(with path: String) -> Data? {
+        let urlPath = "https://image.tmdb.org/t/p/w500\(path)"
+        let url = URL(string: urlPath)!
+        guard let imageData = try? Data(contentsOf: url) else { return nil }
+        return imageData
     }
 }

@@ -12,11 +12,11 @@ struct ListCellViewModel {
     
     var image: UIImage?
     let title: String
-    let overview: String
+    let vote: String
 
-    init(tvSeries: TVSeries) {
-        self.image = UIImage(named: "tree")
-        self.title = tvSeries.name
-        self.overview = "Vote: " + "\(tvSeries.voteAverage)"
+    init(_ record: ImageRecord) {
+        self.image = record.image
+        self.title = record.model.name
+        self.vote = "Vote: " + "\(record.model.voteAverage)"
     }
 }

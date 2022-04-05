@@ -15,24 +15,21 @@ final class MainPageViewController: UIViewController {
         let view = MainPageView()
         view.tableView.delegate = self
         view.tableView.dataSource = self
-        view.tableView.prefetchDataSource = self
         view.segmentControl.addTarget(self, action: #selector(segmentedValueChanged), for: .valueChanged)
         return view
     }()
     
-    private var tvSeries: [TVSeries] = []
+    private var tvSeries: [ImageRecord] = []
     private var loadStatement: Bool = false
-    private var totalResults = 1
     
     var presenter: MainPagePresenterProtocol!
+    let pendingOperations = PendingOperations()
 
-    //MARK: - Initalization
+    //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.titleView = mainView.segmentControl
         view = mainView
-        
         loadPageWithSegmentIndex(index: mainView.segmentControl.selectedSegmentIndex)
     }
 }
@@ -41,76 +38,66 @@ final class MainPageViewController: UIViewController {
 extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return totalResults
+        return tvSeries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableCell.reuseIdentifier, for: indexPath) as? ListTableCell else {
             return UITableViewCell()
         }
-
-        if isLoadingCell(for: indexPath) {
-            cell.applyModel(.none)
-        } else {
-            let tvSeries = self.tvSeries[indexPath.row]
-            let model = ListCellViewModel(tvSeries: tvSeries)
-            cell.applyModel(model)
-        }
         
+        if cell.accessoryView == nil {
+            let indicator = UIActivityIndicatorView(style: .medium)
+            cell.accessoryView = indicator
+        }
+        let indicator = cell.accessoryView as! UIActivityIndicatorView
+        
+        let tvSeries = self.tvSeries[indexPath.row]
+        let model = ListCellViewModel(tvSeries)
+        cell.applyModel(model)
+        
+        switch tvSeries.state {
+        case .download:
+            indicator.startAnimating()
+            if !tableView.isDragging && !tableView.isDecelerating {
+                startOperations(for: tvSeries, at: indexPath)
+            }
+        case .succeed:
+            indicator.stopAnimating()
+        case .failed:
+            indicator.stopAnimating()
+            print("FAILED")
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !isLoadingCell(for: indexPath) {
-            tableView.deselectRow(at: indexPath, animated: true)
-            presenter.selectTVSeries(to: indexPath.row)
-        }
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter.selectTVSeries(to: indexPath.row)
     }
 }
 
-extension MainPageViewController: UITableViewDataSourcePrefetching {
-    
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        if indexPaths.contains(where: isLoadingCell) {
-            let segmentIndex = mainView.segmentControl.selectedSegmentIndex
-            let selectedSegment = MainPageSegments.allCases[segmentIndex]
-            presenter.startPagination(segment: selectedSegment)
-        }
-    }
-}
-
+//MARK: - MainPageViewProtocol
 extension MainPageViewController: MainPageViewProtocol {
     
-    //MARK: - Presenter Output
     func handleOutput(_ output: MainPagePresenterOutput) {
         switch output {
         case .showLoading(let bool):
-            print("Loading state is: \(bool)")
             loadStatement = bool
         case .showList(let tvSeries):
             self.tvSeries = tvSeries
             DispatchQueue.main.async { [weak self] in
                 self?.mainView.tableView.reloadData()
             }
-        case .reloadTableView(let total):
-            self.totalResults = total
-        }
-    }
-    
-    func fetchRows(indexPaths: [IndexPath]) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            let indexPathsToReload = self.visibleIndexPathsToReload(intersecting: indexPaths)
-            self.mainView.tableView.reloadRows(at: indexPathsToReload, with: .automatic)
         }
     }
 }
 
+//MARK: - Segment Control Sender
 private extension MainPageViewController {
     
     func loadPageWithSegmentIndex(index: Int) {
         let segment = MainPageSegments.allCases[index]
-        
         switch segment {
         case .popular(_):
             presenter.loadPopular()
@@ -120,17 +107,80 @@ private extension MainPageViewController {
     }
     
     @objc func segmentedValueChanged(_ sender:UISegmentedControl!) {
-        presenter.resetPagination()
         loadPageWithSegmentIndex(index: sender.selectedSegmentIndex)
     }
+}
+
+//MARK: - Scroll View Delegate
+extension MainPageViewController {
     
-    func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= tvSeries.count
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        pendingOperations.downloadQueue.isSuspended = true
     }
     
-    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-        let indexPathsForVisibleRows = mainView.tableView.indexPathsForVisibleRows ?? []
-        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-        return Array(indexPathsIntersection)
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            loadImagesForOnscreenCells()
+            pendingOperations.downloadQueue.isSuspended = false
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        loadImagesForOnscreenCells()
+        pendingOperations.downloadQueue.isSuspended = false
     }
 }
+
+//MARK: - Operation
+extension MainPageViewController {
+    
+    func loadImagesForOnscreenCells() {
+        if let pathsArray = self.mainView.tableView.indexPathsForVisibleRows {
+
+            let allPendingOperations = Set(pendingOperations.downloadsInProgress.keys)
+            let visiblePaths = Set(pathsArray)
+
+            var toBeCancelled = allPendingOperations
+            var toBeStarted = visiblePaths
+
+            toBeCancelled.subtract(visiblePaths)
+            toBeStarted.subtract(allPendingOperations)
+
+            for indexPath in toBeCancelled {
+                if let pendingDownload = pendingOperations.downloadsInProgress[indexPath] {
+                    pendingDownload.cancel()
+                }
+                pendingOperations.downloadsInProgress.removeValue(forKey: indexPath)
+            }
+
+            for indexPath in toBeStarted {
+                let selectedModel = tvSeries[indexPath.row]
+                startOperations(for: selectedModel, at: indexPath)
+            }
+        }
+    }
+    
+    func startOperations(for photoRecord: ImageRecord, at indexPath: IndexPath) {
+        guard photoRecord.state == .download else { return }
+        startDownload(for: photoRecord, at: indexPath)
+    }
+    
+    func startDownload(for photoRecord: ImageRecord, at indexPath: IndexPath) {
+        guard pendingOperations.downloadsInProgress[indexPath] == nil else {
+            return
+        }
+        
+        let downloadOperation = ImageDownloader(photoRecord)
+        downloadOperation.completionBlock = {
+            guard !downloadOperation.isCancelled else { return }
+            
+            DispatchQueue.main.async {
+                self.pendingOperations.downloadsInProgress.removeValue(forKey: indexPath)
+                self.mainView.tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        }
+        pendingOperations.downloadsInProgress[indexPath] = downloadOperation
+        pendingOperations.downloadQueue.addOperation(downloadOperation)
+    }
+}
+

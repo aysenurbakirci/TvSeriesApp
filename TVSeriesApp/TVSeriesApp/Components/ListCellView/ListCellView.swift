@@ -69,6 +69,6 @@ final class ListCellView: UIView {
     func applyModel(_ model: ListCellViewModel) {
         imageView.image = model.image
         title.text = model.title
-        overview.text = model.overview
+        overview.text = model.vote
     }
 }

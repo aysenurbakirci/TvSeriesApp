@@ -13,6 +13,7 @@
 		3724A05A278463E1003E8C31 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A059278463E1003E8C31 /* APIModel.swift */; };
 		3724A05C278463F8003E8C31 /* TVSeriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724A05B278463F8003E8C31 /* TVSeriesService.swift */; };
 		37420C89278C89DD0003E1A4 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37420C88278C89DD0003E1A4 /* ServiceError.swift */; };
+		37CC208E27FC83AE00057E50 /* DownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC208D27FC83AE00057E50 /* DownloadOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		3724A059278463E1003E8C31 /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		3724A05B278463F8003E8C31 /* TVSeriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSeriesService.swift; sourceTree = "<group>"; };
 		37420C88278C89DD0003E1A4 /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
+		37CC208D27FC83AE00057E50 /* DownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		3724A04D278460D5003E8C31 /* TVSeriesAPI */ = {
 			isa = PBXGroup;
 			children = (
+				37CC208C27FC83A200057E50 /* Operation */,
 				3724A059278463E1003E8C31 /* APIModel.swift */,
 				3724A057278463C7003E8C31 /* API.swift */,
 				3724A05B278463F8003E8C31 /* TVSeriesService.swift */,
@@ -63,6 +66,14 @@
 				3724A04F278460D5003E8C31 /* TVSeriesAPI.docc */,
 			);
 			path = TVSeriesAPI;
+			sourceTree = "<group>";
+		};
+		37CC208C27FC83A200057E50 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				37CC208D27FC83AE00057E50 /* DownloadOperation.swift */,
+			);
+			path = Operation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +160,7 @@
 				3724A05A278463E1003E8C31 /* APIModel.swift in Sources */,
 				3724A05C278463F8003E8C31 /* TVSeriesService.swift in Sources */,
 				3724A050278460D5003E8C31 /* TVSeriesAPI.docc in Sources */,
+				37CC208E27FC83AE00057E50 /* DownloadOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
