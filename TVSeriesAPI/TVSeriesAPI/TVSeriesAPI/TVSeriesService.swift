@@ -68,8 +68,8 @@ final public class TVSeriesService {
                     for data in dataModel.results {
                         let imageRecord = ImageRecord(model: data, path: data.posterPath)
                         recordList.append(imageRecord)
-                        completion(.success(recordList))
                     }
+                    completion(.success(recordList))
                 } else {
                     completion(.failure(ServiceError.decideError(response.statusCode)))
                 }

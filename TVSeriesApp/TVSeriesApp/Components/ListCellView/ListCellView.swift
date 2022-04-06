@@ -43,23 +43,27 @@ final class ListCellView: UIView {
         
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.topAnchor
-            .constraint(equalTo: topAnchor).isActive = true
-        imageView.bottomAnchor
-            .constraint(equalTo: bottomAnchor).isActive = true
-        imageView.leadingAnchor
-            .constraint(equalTo: leadingAnchor, constant: 10.0).isActive = true
-        imageView.widthAnchor
-            .constraint(equalToConstant: CGFloat(cellHight * cellRatio)).isActive = true
-        imageView.heightAnchor
-            .constraint(equalToConstant: CGFloat(cellHight)).isActive = true
+        NSLayoutConstraint.activate([
+            imageView.topAnchor
+                .constraint(equalTo: topAnchor),
+            imageView.bottomAnchor
+                .constraint(equalTo: bottomAnchor),
+            imageView.leadingAnchor
+                .constraint(equalTo: leadingAnchor, constant: 10.0),
+            imageView.widthAnchor
+                .constraint(equalToConstant: CGFloat(cellHight * cellRatio)),
+            imageView.heightAnchor
+                .constraint(equalToConstant: CGFloat(cellHight))
+        ])
         
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.leadingAnchor
-            .constraint(equalTo: imageView.trailingAnchor, constant: 10.0).isActive = true
-        stackView.centerYAnchor
-            .constraint(equalTo: imageView.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor
+                .constraint(equalTo: imageView.trailingAnchor, constant: 10.0),
+            stackView.centerYAnchor
+                .constraint(equalTo: imageView.centerYAnchor)
+        ])
     }
     
     required init?(coder: NSCoder) {
