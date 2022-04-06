@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 public enum ImageRecordStates {
-    case download, succeed, failed
+    case ready, succeed, failed
 }
 
 public final class ImageRecord {
     public let model: TVSeries
     public let urlPath: String
-    public var state = ImageRecordStates.download
+    public var state = ImageRecordStates.ready
     public var image = UIImage(named: "Placeholder")
     
     public init(model: TVSeries, path: String) {

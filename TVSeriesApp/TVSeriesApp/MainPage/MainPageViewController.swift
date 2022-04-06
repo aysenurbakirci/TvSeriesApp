@@ -57,7 +57,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         cell.applyModel(model)
         
         switch tvSeries.state {
-        case .download:
+        case .ready:
             indicator.startAnimating()
             if !tableView.isDragging && !tableView.isDecelerating {
                 startOperations(for: tvSeries, at: indexPath)
@@ -161,7 +161,7 @@ extension MainPageViewController {
     }
     
     func startOperations(for photoRecord: ImageRecord, at indexPath: IndexPath) {
-        guard photoRecord.state == .download else { return }
+        guard photoRecord.state == .ready else { return }
         startDownload(for: photoRecord, at: indexPath)
     }
     
