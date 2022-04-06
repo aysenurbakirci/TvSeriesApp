@@ -77,6 +77,13 @@ final public class TVSeriesService {
         }
         .resume()
     }
+    
+    func getImageData(with path: String) -> Data? {
+        let urlPath = "https://image.tmdb.org/t/p/w500\(path)"
+        let url = URL(string: urlPath)!
+        guard let imageData = try? Data(contentsOf: url) else { return nil }
+        return imageData
+    }
 }
 
 extension TVSeriesService: TVSeriesServiceProtocol {
@@ -91,12 +98,5 @@ extension TVSeriesService: TVSeriesServiceProtocol {
         load(api: TVSeriesAPI.topRated(page: page)) { result in
             completion(result)
         }
-    }
-    
-    public func getImageData(with path: String) -> Data? {
-        let urlPath = "https://image.tmdb.org/t/p/w500\(path)"
-        let url = URL(string: urlPath)!
-        guard let imageData = try? Data(contentsOf: url) else { return nil }
-        return imageData
     }
 }
