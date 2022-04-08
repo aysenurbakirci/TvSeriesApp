@@ -66,7 +66,7 @@ final public class TVSeriesService {
                         return
                     }
                     for data in dataModel.results {
-                        let imageRecord = ImageRecord(model: data, path: data.posterPath)
+                        let imageRecord = ImageRecord(model: data)
                         recordList.append(imageRecord)
                     }
                     completion(.success(recordList))

@@ -14,13 +14,11 @@ public enum ImageRecordStates {
 
 public final class ImageRecord {
     public let model: TVSeries
-    public let urlPath: String
     public var state = ImageRecordStates.ready
     public var image = UIImage(named: "Placeholder")
     
-    public init(model: TVSeries, path: String) {
+    public init(model: TVSeries) {
         self.model = model
-        self.urlPath = path
     }
 }
 
@@ -48,7 +46,7 @@ public class ImageDownloader: Operation {
     public override func main() {
         guard !isCancelled else { return }
         
-        guard let imageData = TVSeriesService().getImageData(with: record.urlPath) else { return }
+        guard let imageData = TVSeriesService().getImageData(with: record.model.posterPath) else { return }
         
         guard !isCancelled else { return }
         
